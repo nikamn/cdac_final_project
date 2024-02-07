@@ -1,20 +1,15 @@
-package com.acts;
+package com.acts.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
-// import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.acts.model.Customer;
-import com.acts.repository.CustomerRepository;
 
 @SpringBootTest
 public class CustomerRepositoryTest {
-
-    // @Autowired
-    // private TestEntityManager entityManager;
 
     @Autowired
     private CustomerRepository customerRepository;
@@ -25,9 +20,7 @@ public class CustomerRepositoryTest {
         Customer customer = new Customer();
         customer.setFirstName("John");
         customer.setLastName("Doe");
-        customer.setEmail("john@example.com");
-        // entityManager.persist(customer);
-        // entityManager.flush();
+        customer.setEmail("johndoe@example.com");
 
         // when
         Customer found = customerRepository.findByEmail(customer.getEmail()).get();

@@ -34,7 +34,7 @@ public class ProductControllerTest {
         // Given
         Integer productId = 1;
 
-        Product product = new Product(1, "Product 1", 10.99, "product1.jpg", 50, "Product 1 description", 1);
+        Product product = new Product(1, "Product 1", 10.99, "product1.jpg", 50, "Product 1 description", null);
 
         when(productService.getProductById(productId)).thenReturn(Optional.of(product));
 

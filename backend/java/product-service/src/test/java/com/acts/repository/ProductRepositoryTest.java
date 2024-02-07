@@ -1,4 +1,4 @@
-package com.acts;
+package com.acts.repository;
 
 import static org.assertj.core.api.Assertions.assertThat;
 
@@ -7,7 +7,6 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 
 import com.acts.model.Product;
-import com.acts.repository.ProductRepository;
 
 @SpringBootTest
 public class ProductRepositoryTest {

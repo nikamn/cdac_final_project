@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.acts.dto.ProductDTO;
 import com.acts.model.Product;
 import com.acts.service.ProductService;
 
@@ -40,20 +41,14 @@ public class ProductController {
     }
 
     @PostMapping
-    public ResponseEntity<Product> createProduct(@RequestBody Product product) {
-        Product createdProduct = productService.createProduct(product);
+    public ResponseEntity<Product> createProduct(@RequestBody ProductDTO productDTO) {
+        Product createdProduct = productService.createProduct(productDTO);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable Integer id, @RequestBody Product updatedProduct) {
-        Optional<Product> existingProduct = productService.getProductById(id);
-        if (existingProduct.isPresent()) {
-            Product savedProduct = productService.updateProduct(id, updatedProduct);
-            return ResponseEntity.ok(savedProduct);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<Product> updateProduct(@PathVariable Integer id, @RequestBody ProductDTO updatedProductDTO) {
+        return productService.updateProduct(id, updatedProductDTO);
     }
 
     @DeleteMapping("/{id}")
