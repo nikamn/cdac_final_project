@@ -1,7 +1,7 @@
 package com.acts.controller;
 
-import java.util.List;
-import java.util.Optional;
+
+import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.acts.model.User;
+import com.acts.dto.UserDTO;
 import com.acts.service.CustomerService;
 
 import lombok.RequiredArgsConstructor;
@@ -22,48 +22,39 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/customers")
 @RequiredArgsConstructor
+
 public class CustomerController {
 
     private final CustomerService customerService;
 
     @GetMapping
-    public ResponseEntity<List<User>> getAllCustomers() {
-        List<User> customers = customerService.getAllCustomers();
-        return ResponseEntity.ok(customers);
+    public ResponseEntity<?> getAllCustomers() {
+
+        return ResponseEntity.ok(customerService.getAllCustomers());
+
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getCustomerById(@PathVariable Integer id) {
-        Optional<User> customer = customerService.getCustomerById(id);
-        return customer.map(ResponseEntity::ok)
-                       .orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<?> getCustomerById(@PathVariable Integer id) {
+        
+        return ResponseEntity.ok(customerService.getCustomerById(id));
     }
 
     @PostMapping
-    public ResponseEntity<User> createCustomer(@RequestBody User customer) {
-        User createdCustomer = customerService.createCustomer(customer);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdCustomer);
+    public ResponseEntity<?> createCustomer(@RequestBody @Valid UserDTO customerDTO) {
+        
+        return ResponseEntity.status(HttpStatus.CREATED).body(customerService.createCustomer(customerDTO));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateCustomer(@PathVariable Integer id, @RequestBody User updatedCustomer) {
-        Optional<User> existingCustomer = customerService.getCustomerById(id);
-        if (existingCustomer.isPresent()) {
-            User savedCustomer = customerService.updateCustomer(id, updatedCustomer);
-            return ResponseEntity.ok(savedCustomer);
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<?> updateCustomer(@PathVariable Integer id, @RequestBody @Valid UserDTO updatedCustomer) {
+
+       return ResponseEntity.ok(customerService.updateCustomer(id, updatedCustomer));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteCustomer(@PathVariable Integer id) {
-        Optional<User> existingCustomer = customerService.getCustomerById(id);
-        if (existingCustomer.isPresent()) {
-            customerService.deleteCustomer(id);
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<?> deleteCustomer(@PathVariable Integer id) {
+
+        return ResponseEntity.ok(customerService.deleteCustomer(id));
     }
 }

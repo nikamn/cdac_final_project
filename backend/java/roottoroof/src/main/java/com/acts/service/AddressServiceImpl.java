@@ -1,6 +1,8 @@
 package com.acts.service;
 
+import com.acts.custom_exceptions.ResourceNotFoundException;
 import com.acts.dto.AddressDTO;
+import com.acts.dto.ApiResponse;
 import com.acts.model.Address;
 import com.acts.model.User;
 import com.acts.repository.AddressRepository;
@@ -29,14 +31,17 @@ public class AddressServiceImpl implements AddressService {
 	public AddressDTO getAddressDetails(Integer addressId) {
 		
 		return mapper.map(
-				adrRepo.findById(addressId).get(),
+				adrRepo.findById(addressId).orElseThrow(
+						() -> new ResourceNotFoundException("Invalid Emp  Id Or Address not yet assigned !!!!")),
 				AddressDTO.class);
 	}
 
 	@Override
-	public AddressDTO assignEmpAddress(Integer customerId, AddressDTO address) {
+	public ApiResponse assignEmpAddress(Integer customerId, AddressDTO address) {
 
-		User customer = customerRepository.findById(customerId).get();
+
+		User customer = customerRepository.findById(customerId)
+		                 .orElseThrow(()-> new ResourceNotFoundException("invaid customer id"));
         
 		// map dtp --> entity
 		Address addressEntity = mapper.map(address, Address.class);
@@ -46,32 +51,33 @@ public class AddressServiceImpl implements AddressService {
 		// save adr details
 
         //adrRepo.save(addressEntity);
-		return mapper.map(adrRepo.save(addressEntity), AddressDTO.class);
+		
+		return new ApiResponse("Assigned new Address to Customer,"+ customer.getFirstName());
 			
     }
 
 	@Override
-	public AddressDTO updateEmpAddress(Integer empId, AddressDTO address) {
-		Address addressEntity = adrRepo.findById(empId).get();
+	public ApiResponse updateEmpAddress(Integer empId, AddressDTO address) {
+
+		Address addressEntity = adrRepo.findById(empId)
+		                        .orElseThrow(()-> new ResourceNotFoundException("Address is not yet Assigned"));
 	
 		mapper.map(address, addressEntity);
 		// save adr details
+		adrRepo.save(addressEntity);
+		return new ApiResponse("Updated address for Emp" +addressEntity.getId()); 
 		
-        return mapper.map(adrRepo.save(addressEntity), AddressDTO.class);
 	}
 
     @Override
-    public AddressDTO deleteAddress(Integer customerId) {
+    public ApiResponse deleteAddress(Integer customerId) {
 
-        Address addressEntity = adrRepo.findById(customerId).orElseThrow(()->new IllegalArgumentException());
+        Address address=adrRepo.findById(customerId).orElseThrow(()->new ResourceNotFoundException("Address not found"));
+		
+		return new ApiResponse("Address deleted of customer with id " + address.getId());
+			
 
-        adrRepo.deleteById(customerId);
-
-       return mapper.map(addressEntity, AddressDTO.class);
- 
-           
-       
-    }
+	}
 
 
 }

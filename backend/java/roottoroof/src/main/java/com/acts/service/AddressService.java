@@ -1,15 +1,16 @@
 package com.acts.service;
 
 import com.acts.dto.AddressDTO;
+import com.acts.dto.ApiResponse;
 
 public interface AddressService {	
 
-	AddressDTO assignEmpAddress( Integer customerId,  AddressDTO address);		
+	ApiResponse assignEmpAddress( Integer customerId,  AddressDTO address);		
 
 	AddressDTO getAddressDetails(Integer addressId);
 	//update emp address : complete update
-	AddressDTO updateEmpAddress( Integer customerId,  AddressDTO address);
+	ApiResponse updateEmpAddress( Integer customerId,  AddressDTO address);
 
-    AddressDTO deleteAddress(Integer customerId);
+    ApiResponse deleteAddress(Integer customerId);
 	
 }

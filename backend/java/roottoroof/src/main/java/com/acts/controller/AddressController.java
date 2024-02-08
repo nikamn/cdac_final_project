@@ -1,5 +1,8 @@
 package com.acts.controller;
 
+import javax.validation.Valid;
+import javax.validation.constraints.NotNull;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -31,9 +34,8 @@ public class AddressController {
 	
 	// http://host:port/api/customers/{customerId}/address , method=POST
 	@PostMapping
-	
-	public ResponseEntity<?> assignEmpAddress(@PathVariable  Integer customerId,
-			@RequestBody  AddressDTO address) {
+	public ResponseEntity<?> assignEmpAddress(@PathVariable @NotNull Integer customerId,
+			@RequestBody @Valid  AddressDTO address) {
 		
 		return ResponseEntity.status(HttpStatus.CREATED).body(adrService.assignEmpAddress(customerId, address));
 	}
@@ -41,7 +43,6 @@ public class AddressController {
 	
 	// http://host:port/api/customers/{customerId}/address method=GET
 	@GetMapping
-	
 	public ResponseEntity<?> getEmpAddress(@PathVariable Integer customerId) {
 		
 		return ResponseEntity.ok(adrService.getAddressDetails(customerId));
@@ -50,8 +51,8 @@ public class AddressController {
 	
     // http://host:port/api/customers/{customerId}/address , method=PUT
 	@PutMapping
-	public ResponseEntity<?> updateEmpAddress(@PathVariable  Integer customerId,
-			@RequestBody  AddressDTO address) {
+	public ResponseEntity<?> updateEmpAddress(@PathVariable  @NotNull Integer customerId,
+			@RequestBody @Valid AddressDTO address) {
 		
 		return ResponseEntity.ok()
 				.body(adrService.updateEmpAddress(customerId, address));
