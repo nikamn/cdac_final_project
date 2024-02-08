@@ -1,7 +1,6 @@
 package com.acts.controller;
 
-import java.util.List;
-import java.util.Optional;
+import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -15,7 +14,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.acts.dto.ProductDTO;
-import com.acts.model.Product;
 import com.acts.service.ProductService;
 
 import lombok.RequiredArgsConstructor;
@@ -23,42 +21,37 @@ import lombok.RequiredArgsConstructor;
 @RestController
 @RequestMapping("/api/products")
 @RequiredArgsConstructor
+
 public class ProductController {
 
     private final ProductService productService;
 
     @GetMapping
-    public ResponseEntity<List<Product>> getAllProducts() {
-        List<Product> products = productService.getAllProducts();
-        return ResponseEntity.ok(products);
+    public ResponseEntity<?> getAllProducts() {
+
+        return ResponseEntity.ok(productService.getAllProducts());
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Product> getProductById(@PathVariable Integer id) {
-        Optional<Product> product = productService.getProductById(id);
-        return product.map(ResponseEntity::ok)
-                       .orElseGet(() -> ResponseEntity.notFound().build());
+    public ResponseEntity<?> getProductById(@PathVariable Integer id) {
+        
+        return ResponseEntity.ok(productService.getProductById(id));
     }
+    
 
     @PostMapping
-    public ResponseEntity<Product> createProduct(@RequestBody ProductDTO productDTO) {
-        Product createdProduct = productService.createProduct(productDTO);
-        return ResponseEntity.status(HttpStatus.CREATED).body(createdProduct);
+    public ResponseEntity<?> createProduct(@RequestBody @Valid ProductDTO productDTO) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(productService.createProduct(productDTO));
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Product> updateProduct(@PathVariable Integer id, @RequestBody ProductDTO updatedProductDTO) {
-        return productService.updateProduct(id, updatedProductDTO);
+    public ResponseEntity<?> updateProduct(@PathVariable Integer id, @RequestBody  @Valid ProductDTO ProductDTO) {
+        return ResponseEntity.ok(productService.updateProduct(id, ProductDTO));
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteProduct(@PathVariable Integer id) {
-        Optional<Product> existingProduct = productService.getProductById(id);
-        if (existingProduct.isPresent()) {
-            productService.deleteProduct(id);
-            return ResponseEntity.noContent().build();
-        } else {
-            return ResponseEntity.notFound().build();
-        }
+    public ResponseEntity<?> deleteProduct(@PathVariable Integer id) {
+       
+        return ResponseEntity.ok(productService.deleteProduct(id));
     }
 }
