@@ -2,7 +2,7 @@ package com.acts.service;
 
 import com.acts.dto.AddressDTO;
 import com.acts.model.Address;
-import com.acts.model.Customer;
+import com.acts.model.User;
 import com.acts.repository.AddressRepository;
 import com.acts.repository.CustomerRepository;
 
@@ -36,7 +36,7 @@ public class AddressServiceImpl implements AddressService {
 	@Override
 	public AddressDTO assignEmpAddress(Integer customerId, AddressDTO address) {
 
-		Customer customer = customerRepository.findById(customerId).get();
+		User customer = customerRepository.findById(customerId).get();
         
 		// map dtp --> entity
 		Address addressEntity = mapper.map(address, Address.class);

@@ -43,5 +43,5 @@ public class Address  {
 	@OneToOne (fetch = FetchType.LAZY)
 	@JoinColumn(name="customer_id")
 	@MapsId
-	private Customer owner;
+	private User owner;
 }

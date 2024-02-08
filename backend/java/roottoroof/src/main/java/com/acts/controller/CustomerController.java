@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.acts.model.Customer;
+import com.acts.model.User;
 import com.acts.service.CustomerService;
 
 import lombok.RequiredArgsConstructor;
@@ -27,29 +27,29 @@ public class CustomerController {
     private final CustomerService customerService;
 
     @GetMapping
-    public ResponseEntity<List<Customer>> getAllCustomers() {
-        List<Customer> customers = customerService.getAllCustomers();
+    public ResponseEntity<List<User>> getAllCustomers() {
+        List<User> customers = customerService.getAllCustomers();
         return ResponseEntity.ok(customers);
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<Customer> getCustomerById(@PathVariable Integer id) {
-        Optional<Customer> customer = customerService.getCustomerById(id);
+    public ResponseEntity<User> getCustomerById(@PathVariable Integer id) {
+        Optional<User> customer = customerService.getCustomerById(id);
         return customer.map(ResponseEntity::ok)
                        .orElseGet(() -> ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public ResponseEntity<Customer> createCustomer(@RequestBody Customer customer) {
-        Customer createdCustomer = customerService.createCustomer(customer);
+    public ResponseEntity<User> createCustomer(@RequestBody User customer) {
+        User createdCustomer = customerService.createCustomer(customer);
         return ResponseEntity.status(HttpStatus.CREATED).body(createdCustomer);
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Customer> updateCustomer(@PathVariable Integer id, @RequestBody Customer updatedCustomer) {
-        Optional<Customer> existingCustomer = customerService.getCustomerById(id);
+    public ResponseEntity<User> updateCustomer(@PathVariable Integer id, @RequestBody User updatedCustomer) {
+        Optional<User> existingCustomer = customerService.getCustomerById(id);
         if (existingCustomer.isPresent()) {
-            Customer savedCustomer = customerService.updateCustomer(id, updatedCustomer);
+            User savedCustomer = customerService.updateCustomer(id, updatedCustomer);
             return ResponseEntity.ok(savedCustomer);
         } else {
             return ResponseEntity.notFound().build();
@@ -58,7 +58,7 @@ public class CustomerController {
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> deleteCustomer(@PathVariable Integer id) {
-        Optional<Customer> existingCustomer = customerService.getCustomerById(id);
+        Optional<User> existingCustomer = customerService.getCustomerById(id);
         if (existingCustomer.isPresent()) {
             customerService.deleteCustomer(id);
             return ResponseEntity.noContent().build();

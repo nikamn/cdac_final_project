@@ -42,7 +42,7 @@ public class ProductServiceImpl implements ProductService {
         Product product = Product.builder()
                 .productName(productDTO.getProductName())
                 .price(productDTO.getPrice())
-                .imagePath(productDTO.getImagePath())
+                .imageURL(productDTO.getImagePath())
                 .quantity(productDTO.getQuantity())
                 .description(productDTO.getDescription())
                 .category(category)
@@ -62,7 +62,7 @@ public class ProductServiceImpl implements ProductService {
 
             product.setProductName(updatedProductDTO.getProductName());
             product.setPrice(updatedProductDTO.getPrice());
-            product.setImagePath(updatedProductDTO.getImagePath());
+            product.setImageURL(updatedProductDTO.getImagePath());
             product.setQuantity(updatedProductDTO.getQuantity());
             product.setDescription(updatedProductDTO.getDescription());
             product.setCategory(category);

@@ -9,10 +9,12 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.validation.constraints.NotNull;
 
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 import lombok.AllArgsConstructor;
@@ -21,7 +23,7 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "product")
+@Table(name = "products")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
@@ -29,27 +31,23 @@ import lombok.NoArgsConstructor;
 public class Product {
 
     @Id
-    @Column(name = "product_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer productId;
+    private Integer id;
 
-    @Column(name = "product_name", unique = true, nullable = false)
-    private String productName;
+    @Column(name = "product_name", unique = true)
+    private @NotNull String productName;
 
-    private double price;
+    private @NotNull double price;
+    private @NotNull String description;
 
-    @Column(name = "image_path")
-    private String imagePath;
+    @Column(name = "image_url")
+    private @NotNull String imageURL;
 
     private int quantity;
 
-    private String description;
-
-    // @Column(name = "category_id")
-    // private int categoryId;
-
-    @ManyToOne(fetch = FetchType.LAZY)
-    @JoinColumn(name = "category_id", nullable = false) // Make category mandatory
+    @JsonIgnore
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "category_id", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     private Category category;

@@ -1,27 +1,35 @@
 package com.acts.model;
 
+import java.util.List;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import com.acts.enums.Role;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import lombok.AllArgsConstructor;
-import lombok.Getter;
+import lombok.Builder;
+import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.Setter;
 
 @Entity
-@Table(name = "customer")
-@Getter
-@Setter
+@Table(name = "users")
+@Data
 @AllArgsConstructor
 @NoArgsConstructor
-public class Customer {
+@Builder
+public class User {
 
     @Id
-    @Column(name = "customer_id")
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
@@ -35,7 +43,14 @@ public class Customer {
 
     private String password;
 
+    @Enumerated(EnumType.STRING)
+    private Role role;
+
     @Column(name = "mobile_no")
     private String mobileNo;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
+    private List<Order> orders;
 
 }
