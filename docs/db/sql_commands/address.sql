@@ -1,4 +1,4 @@
-INSERT INTO cust_adr (customer_id, city, house_no, pin_code, state, street, zip_code) 
+INSERT INTO address (user_id, city, house_no, pin_code, state, street, zip_code) 
 VALUES 
 (1, 'New York', '123', '12345', 'NY', 'Main Street', '10001'),
 (2, 'Los Angeles', '456', '54321', 'CA', 'Elm Avenue', '90001'),
