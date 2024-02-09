@@ -1,13 +1,5 @@
 package com.acts.service.impl;
 
-import com.acts.custom_exceptions.ResourceNotFoundException;
-import com.acts.dto.AddressDTO;
-import com.acts.dto.ApiResponse;
-import com.acts.model.Address;
-import com.acts.model.User;
-import com.acts.repository.AddressRepository;
-import com.acts.repository.UserRepository;
-import com.acts.service.AddressService;
 
 import javax.transaction.Transactional;
 
@@ -15,18 +7,30 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.acts.custom_exceptions.ResourceNotFoundException;
+import com.acts.dto.ApiResponse;
+import com.acts.dto.address.AddressDTO;
+import com.acts.model.Address;
+import com.acts.model.User;
+import com.acts.repository.AddressRepository;
+import com.acts.repository.UserRepository;
+import com.acts.service.AddressService;
+
+import lombok.RequiredArgsConstructor;
+
 
 @Service
 @Transactional
+@RequiredArgsConstructor
 public class AddressServiceImpl implements AddressService {
-	@Autowired
-	private UserRepository customerRepository;
+	
+	private final UserRepository customerRepository;
+
+	
+	private final AddressRepository adrRepo;
 
 	@Autowired
-	private AddressRepository adrRepo;
-
-	@Autowired
-	private ModelMapper mapper;	
+	private  ModelMapper mapper;	
 
 	@Override
 	public AddressDTO getAddressDetails(Integer addressId) {
@@ -35,10 +39,11 @@ public class AddressServiceImpl implements AddressService {
 				adrRepo.findById(addressId).orElseThrow(
 						() -> new ResourceNotFoundException("Invalid Emp  Id Or Address not yet assigned !!!!")),
 				AddressDTO.class);
+
 	}
 
 	@Override
-	public ApiResponse assignEmpAddress(Integer customerId, AddressDTO address) {
+	public ApiResponse assignUserAddress(Integer customerId, AddressDTO address) {
 
 
 		User customer = customerRepository.findById(customerId)
@@ -51,14 +56,14 @@ public class AddressServiceImpl implements AddressService {
 		addressEntity.setOwner(customer);
 		// save adr details
 
-        //adrRepo.save(addressEntity);
+        adrRepo.save(addressEntity);
 		
 		return new ApiResponse("Assigned new Address to Customer,"+ customer.getFirstName());
 			
     }
 
 	@Override
-	public ApiResponse updateEmpAddress(Integer empId, AddressDTO address) {
+	public ApiResponse updateUserAddress(Integer empId, AddressDTO address) {
 
 		Address addressEntity = adrRepo.findById(empId)
 		                        .orElseThrow(()-> new ResourceNotFoundException("Address is not yet Assigned"));
@@ -71,7 +76,7 @@ public class AddressServiceImpl implements AddressService {
 	}
 
     @Override
-    public ApiResponse deleteAddress(Integer customerId) {
+    public ApiResponse deleteUserAddress(Integer customerId) {
 
         Address address=adrRepo.findById(customerId).orElseThrow(()->new ResourceNotFoundException("Address not found"));
 		
@@ -79,6 +84,12 @@ public class AddressServiceImpl implements AddressService {
 			
 
 	}
+
+	// Function<Address, AddressDTO> getAddressDTOFromAdress = address -> {
+    //     AddressDTO addressDTO = mapper.map(address, AddressDTO.class);
+    //     //addressDTO.setId(address.getId());
+    //     return addressDTO;
+    // };
 
 
 }

@@ -9,7 +9,7 @@ import lombok.Setter;
 import lombok.ToString;
 
 @Entity
-@Table(name="cust_adr")
+@Table(name="address")
 @NoArgsConstructor
 @Getter
 @Setter
@@ -41,7 +41,7 @@ public class Address  {
 
 	//owning side : Address (since FK)
 	@OneToOne (fetch = FetchType.LAZY)
-	@JoinColumn(name="customer_id")
+	@JoinColumn(name="user_id")
 	@MapsId
 	private User owner;
 }
