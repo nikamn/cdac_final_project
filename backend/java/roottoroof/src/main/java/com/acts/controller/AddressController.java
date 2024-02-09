@@ -3,7 +3,6 @@ package com.acts.controller;
 import javax.validation.Valid;
 import javax.validation.constraints.NotNull;
 
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.annotation.Validated;
@@ -16,34 +15,32 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-
-import com.acts.dto.AddressDTO;
+import com.acts.dto.address.AddressDTO;
 import com.acts.service.AddressService;
+
+import lombok.RequiredArgsConstructor;
 
 @RestController
 @RequestMapping("/api/customers/{customerId}/address")
 @Validated 
+@RequiredArgsConstructor
 public class AddressController {
-	@Autowired
-	private AddressService adrService;
-
-	public AddressController() {
-		System.out.println("in ctor of " + getClass());
-	}
+	
+	private final AddressService adrService;
 
 	
 	// http://host:port/api/customers/{customerId}/address , method=POST
 	@PostMapping
-	public ResponseEntity<?> assignEmpAddress(@PathVariable @NotNull Integer customerId,
-			@RequestBody @Valid  AddressDTO address) {
+	public ResponseEntity<?> assignUserAddress(@PathVariable @NotNull Integer customerId,
+			@RequestBody @Valid  AddressDTO addressDTO) {
 		
-		return ResponseEntity.status(HttpStatus.CREATED).body(adrService.assignEmpAddress(customerId, address));
+		return ResponseEntity.status(HttpStatus.CREATED).body(adrService.assignUserAddress(customerId, addressDTO));
 	}
 
 	
 	// http://host:port/api/customers/{customerId}/address method=GET
 	@GetMapping
-	public ResponseEntity<?> getEmpAddress(@PathVariable Integer customerId) {
+	public ResponseEntity<?> getAddressDetails(@PathVariable Integer customerId) {
 		
 		return ResponseEntity.ok(adrService.getAddressDetails(customerId));
 	}
@@ -51,19 +48,19 @@ public class AddressController {
 	
     // http://host:port/api/customers/{customerId}/address , method=PUT
 	@PutMapping
-	public ResponseEntity<?> updateEmpAddress(@PathVariable  @NotNull Integer customerId,
-			@RequestBody @Valid AddressDTO address) {
+	public ResponseEntity<?> updateUserAddress(@PathVariable  @NotNull Integer customerId,
+			@RequestBody @Valid AddressDTO addressDTO) {
 		
 		return ResponseEntity.ok()
-				.body(adrService.updateEmpAddress(customerId, address));
+				.body(adrService.updateUserAddress(customerId, addressDTO));
 	}
 
     // http://host:port/api/customers/{customerId}/address , method=DELETE
     @DeleteMapping
-    public ResponseEntity<?> deleteAddress(@PathVariable  Integer customerId) {
+    public ResponseEntity<?> deleteUserAddress(@PathVariable  Integer customerId) {
 		
 		return ResponseEntity.ok()
-				.body(adrService.deleteAddress(customerId));
+				.body(adrService.deleteUserAddress(customerId));
 	}
 
 

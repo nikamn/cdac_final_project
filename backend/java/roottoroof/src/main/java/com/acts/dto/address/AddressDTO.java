@@ -1,4 +1,4 @@
-package com.acts.dto;
+package com.acts.dto.address;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,6 +14,8 @@ import lombok.ToString;
 
 public class AddressDTO {
 
+    private Integer id;
+    
     private String houseNo;
     
     private String street;
