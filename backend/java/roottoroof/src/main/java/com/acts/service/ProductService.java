@@ -2,7 +2,7 @@ package com.acts.service;
 
 import java.util.List;
 import com.acts.dto.ApiResponse;
-import com.acts.dto.ProductDTO;
+import com.acts.dto.product.ProductDTO;
 
 public interface ProductService {
 

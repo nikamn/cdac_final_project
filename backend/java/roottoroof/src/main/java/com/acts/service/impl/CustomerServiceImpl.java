@@ -1,4 +1,4 @@
-package com.acts.service;
+package com.acts.service.impl;
 
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +16,8 @@ import com.acts.dto.UserDTO;
 import com.acts.model.Address;
 import com.acts.model.User;
 import com.acts.repository.AddressRepository;
-import com.acts.repository.CustomerRepository;
+import com.acts.repository.UserRepository;
+import com.acts.service.CustomerService;
 
 
 @Service
@@ -24,7 +25,7 @@ import com.acts.repository.CustomerRepository;
 public class CustomerServiceImpl implements CustomerService {
 
     @Autowired
-    private CustomerRepository customerRepository;
+    private UserRepository customerRepository;
 
     @Autowired
 	private ModelMapper mapper;

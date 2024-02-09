@@ -1,4 +1,4 @@
-package com.acts.service;
+package com.acts.service.impl;
 
 import com.acts.custom_exceptions.ResourceNotFoundException;
 import com.acts.dto.AddressDTO;
@@ -6,7 +6,8 @@ import com.acts.dto.ApiResponse;
 import com.acts.model.Address;
 import com.acts.model.User;
 import com.acts.repository.AddressRepository;
-import com.acts.repository.CustomerRepository;
+import com.acts.repository.UserRepository;
+import com.acts.service.AddressService;
 
 import javax.transaction.Transactional;
 
@@ -19,7 +20,7 @@ import org.springframework.stereotype.Service;
 @Transactional
 public class AddressServiceImpl implements AddressService {
 	@Autowired
-	private CustomerRepository customerRepository;
+	private UserRepository customerRepository;
 
 	@Autowired
 	private AddressRepository adrRepo;
