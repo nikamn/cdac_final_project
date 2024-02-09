@@ -6,6 +6,4 @@ import com.acts.model.Address;
 
 public interface AddressRepository extends JpaRepository<Address, Integer> {
 	
-    
-
 }

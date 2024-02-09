@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.acts.dto.ProductDTO;
+import com.acts.dto.product.ProductDTO;
 import com.acts.service.ProductService;
 
 import lombok.RequiredArgsConstructor;
@@ -34,10 +34,9 @@ public class ProductController {
 
     @GetMapping("/{id}")
     public ResponseEntity<?> getProductById(@PathVariable Integer id) {
-        
+
         return ResponseEntity.ok(productService.getProductById(id));
     }
-    
 
     @PostMapping
     public ResponseEntity<?> createProduct(@RequestBody @Valid ProductDTO productDTO) {
@@ -45,13 +44,13 @@ public class ProductController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateProduct(@PathVariable Integer id, @RequestBody  @Valid ProductDTO ProductDTO) {
+    public ResponseEntity<?> updateProduct(@PathVariable Integer id, @RequestBody @Valid ProductDTO ProductDTO) {
         return ResponseEntity.ok(productService.updateProduct(id, ProductDTO));
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<?> deleteProduct(@PathVariable Integer id) {
-       
+
         return ResponseEntity.ok(productService.deleteProduct(id));
     }
 }
