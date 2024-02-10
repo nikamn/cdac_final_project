@@ -63,22 +63,20 @@ public class ServiceController {
     /* Section of the customers starts here..!() */
     
     //return the services of the customer with given id
-    @GetMapping("/customers/{id}")
-    public ResponseEntity<?> giveServicesOfCustomer(@PathVariable Integer id) {
+    //http:localhost:port/api/services/users/{id}
 
-        return ResponseEntity.ok(serviceManager.giveServicesOfCustomers(id));
+    @GetMapping("/users/{id}")
+    public ResponseEntity<?> giveServicesOfUser(@PathVariable Integer id) {
+        
+        return ResponseEntity.ok(serviceManager.giveServicesOfUser(id));
     }
 
-    //add the given service in the services of given customer
-    @PostMapping("{serviceId}/customers/{customerId}")
-    public ResponseEntity<?> addServiceInCustomer(@PathVariable Integer id) {
+    // //add the given service in the services of given customer
+    // @PostMapping("{serviceId}/customers/{customerId}")
+    // public ResponseEntity<?> addServiceInUser(@PathVariable Integer serviceId,@PathVariable Integer customerId) {
 
-        return ResponseEntity.ok(serviceManager.addServiceInCustomer(id));
+    //     return ResponseEntity.ok(serviceManager.addServiceInUser(serviceId,customerId));
 
-    }
-    
-
-    
-    
+    // }
     
 }

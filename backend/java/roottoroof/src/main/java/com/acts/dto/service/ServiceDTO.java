@@ -21,7 +21,6 @@ public class ServiceDTO {
 
     private @NotNull String description;
 
-    private @NotNull int userId;
+    private int userId;
 
-    
 }
