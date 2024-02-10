@@ -33,10 +33,10 @@ public class Address  {
 	@Column(length=20)
 	private String state;
 
-    @Column(length=20,name="pin_code")
+    @Column(length=6,name="pin_code")
 	private String pinCode;
 	
-	@Column(length=20,name="zip_code")
+	@Column(length=6,name="zip_code")
 	private String zipCode;
 
 	//owning side : Address (since FK)

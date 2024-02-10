@@ -8,10 +8,14 @@ import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.acts.custom_exceptions.ResourceNotFoundException;
 import com.acts.dto.ApiResponse;
+import com.acts.dto.user.SignInDTO;
+import com.acts.dto.user.SignInResponseDTO;
+import com.acts.dto.user.SignupDTO;
 import com.acts.dto.user.UserDTO;
 import com.acts.model.Address;
 import com.acts.model.User;
@@ -85,6 +89,40 @@ public class UserServiceImpl implements UserService {
         userRepository.delete(user);
 
         return new ApiResponse("User details deleted");
+
+    }
+
+    @Override
+    public ApiResponse signUp(SignupDTO signupDTO) {
+          
+
+        Optional<User> user = userRepository.findByEmail(signupDTO.getEmail());
+
+        if(user.isPresent()){
+            return new ApiResponse("User is already registered");
+        }
+
+        userRepository.save(mapper.map(signupDTO, User.class));
+        return new ApiResponse("Registration successful");
+    }
+
+    @Override
+    public ApiResponse signIn(SignInDTO signInDTO) {
+        
+         Optional<User> user = userRepository.findByEmail(signInDTO.getEmail());
+         if(user.isPresent()){
+
+            if(user.get().getPassword().equals(signInDTO.getPassword())){
+                return new ApiResponse("Loginn Successfully!:"+user.get().getFirstName());
+            }
+            else{
+                return new ApiResponse("Invalid password");
+            }
+
+         }
+        
+        return new ApiResponse("User is not yet registered");
+         
 
     }
 }

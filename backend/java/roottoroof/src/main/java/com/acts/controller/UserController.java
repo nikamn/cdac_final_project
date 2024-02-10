@@ -12,8 +12,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.acts.dto.user.SignInDTO;
+import com.acts.dto.user.SignupDTO;
 import com.acts.dto.user.UserDTO;
 import com.acts.service.UserService;
 
@@ -62,4 +65,18 @@ public class UserController {
 
         return ResponseEntity.ok(userService.deleteUser(id));
     }
+
+    // http://host:port/api/users/signyp , method=POST
+    @PostMapping("/signup")
+    public ResponseEntity<?> SignUp(@RequestBody SignupDTO signupDTO){
+        return ResponseEntity.ok(userService.signUp(signupDTO));
+    }
+
+    @PostMapping("/signIn")
+    public ResponseEntity<?> Signin(@RequestBody SignInDTO signInDTO)  {
+        System.out.println(signInDTO.getEmail());
+        
+        return ResponseEntity.ok(userService.signIn(signInDTO));
+    }
+
 }
