@@ -8,13 +8,11 @@ import javax.transaction.Transactional;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import com.acts.custom_exceptions.ResourceNotFoundException;
 import com.acts.dto.ApiResponse;
 import com.acts.dto.user.SignInDTO;
-import com.acts.dto.user.SignInResponseDTO;
 import com.acts.dto.user.SignupDTO;
 import com.acts.dto.user.UserDTO;
 import com.acts.model.Address;
