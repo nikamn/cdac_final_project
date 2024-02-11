@@ -30,7 +30,7 @@ public class Category {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @Column(name = "category_name")
+    @Column(name = "category_name",unique = true)
     private String categoryName;
 
     private @NotBlank String description;

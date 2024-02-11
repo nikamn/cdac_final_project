@@ -3,7 +3,11 @@ package com.acts.service;
 
 import java.util.List;
 
+
 import com.acts.dto.ApiResponse;
+import com.acts.dto.ResponseDTO;
+import com.acts.dto.user.SignInDTO;
+import com.acts.dto.user.SignupDTO;
 import com.acts.dto.user.UserDTO;
 
 public interface UserService {
@@ -20,5 +24,10 @@ public interface UserService {
     public UserDTO updateUser(Integer id, UserDTO updatedUser);
 
     public ApiResponse deleteUser(Integer id);
+
+    public ResponseDTO signUp(SignupDTO signupDTO);
+    
+    public ApiResponse signIn(SignInDTO signInDTO);
+
 }
 

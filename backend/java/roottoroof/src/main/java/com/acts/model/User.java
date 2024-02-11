@@ -53,4 +53,8 @@ public class User {
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Order> orders;
 
+    @JsonIgnore
+    @OneToMany(mappedBy="user",fetch=FetchType.LAZY)
+    private List<Service> services;
+
 }
