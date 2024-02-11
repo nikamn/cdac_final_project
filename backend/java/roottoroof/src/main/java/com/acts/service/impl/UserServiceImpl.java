@@ -3,6 +3,7 @@ package com.acts.service.impl;
 import java.security.MessageDigest;
 import java.security.NoSuchAlgorithmException;
 import java.util.List;
+import java.util.Objects;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
@@ -13,17 +14,21 @@ import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.acts.custom_exceptions.AuthenticationFailException;
 import com.acts.custom_exceptions.CustomException;
 import com.acts.custom_exceptions.ResourceNotFoundException;
 import com.acts.dto.ApiResponse;
 import com.acts.dto.ResponseDTO;
 import com.acts.dto.user.SignInDTO;
+import com.acts.dto.user.SignInResponseDTO;
 import com.acts.dto.user.SignupDTO;
 import com.acts.dto.user.UserDTO;
 import com.acts.model.Address;
+import com.acts.model.AuthenticationToken;
 import com.acts.model.User;
 import com.acts.repository.AddressRepository;
 import com.acts.repository.UserRepository;
+import com.acts.service.AuthenticationService;
 import com.acts.service.UserService;
 
 @Service
@@ -38,6 +43,9 @@ public class UserServiceImpl implements UserService {
 
     @Autowired
     private AddressRepository addressRepository;
+
+    @Autowired
+    private AuthenticationService authenticationService;
 
     public List<UserDTO> getAllUsers() {
 
@@ -96,6 +104,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    @Transactional
     public ResponseDTO signUp(SignupDTO signupDTO) throws CustomException {
           
 
@@ -114,9 +123,16 @@ public class UserServiceImpl implements UserService {
         }
      
         signupDTO.setPassword(encryptedPassword);
-        userRepository.save(mapper.map(signupDTO, User.class));
+        User user = mapper.map(signupDTO, User.class);
+        userRepository.save(user);
 
-        return new ResponseDTO("success","dummy response");
+
+       // creating the token 
+       final AuthenticationToken authenticationToken = new AuthenticationToken(user);
+
+       authenticationService.saveConfirmationToken(authenticationToken);
+
+        return new ResponseDTO("success","user created successfully..!!");
         
     }
 
@@ -131,22 +147,27 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ApiResponse signIn(SignInDTO signInDTO) {
-        
+    public SignInResponseDTO signIn(SignInDTO signInDTO) throws NoSuchAlgorithmException {
+         
+        //finding the user by email 
          Optional<User> user = userRepository.findByEmail(signInDTO.getEmail());
-         if(user.isPresent()){
-
-            if(user.get().getPassword().equals(signInDTO.getPassword())){
-                return new ApiResponse("Loginn Successfully!:"+user.get().getFirstName());
-            }
-            else{
-                return new ApiResponse("Invalid password");
-            }
-
+         if(!user.isPresent()){
+            throw new AuthenticationFailException("user is not registered yet..!!");
          }
         
-        return new ApiResponse("User is not yet registered");
-         
+       
+        if(!user.get().getPassword().equals(hashPassword(signInDTO.getPassword()))){
+             throw new AuthenticationFailException("Invalid Password..!!");
+        }
+        
+        AuthenticationToken token =  authenticationService.getToken(user.get());
+
+        if(Objects.isNull(token)){
+            throw new CustomException("token is not Present");
+        }
+
+        return new SignInResponseDTO("sucess",token.getToken());
+        
 
     }
 }

@@ -9,9 +9,8 @@ import lombok.NoArgsConstructor;
 @Data
 public class SignInResponseDTO {
 
-    private Integer id;
-    private String firstName;
-    private String lastName;
-    private String message;
+    private String status;
+    private String token;
+
 
 }

@@ -1,6 +1,8 @@
 package com.acts.controller;
 
 
+import java.security.NoSuchAlgorithmException;
+
 import javax.validation.Valid;
 
 import org.springframework.http.HttpStatus;
@@ -67,13 +69,12 @@ public class UserController {
 
     // http://host:port/api/users/signup , method=POST
     @PostMapping("/signup")
-    public ResponseEntity<?> SignUp(@RequestBody SignupDTO signupDTO){
+    public ResponseEntity<?> signUp(@RequestBody SignupDTO signupDTO){
         return ResponseEntity.ok(userService.signUp(signupDTO));
     }
 
-    @PostMapping("/signIn")
-    public ResponseEntity<?> Signin(@RequestBody SignInDTO signInDTO)  {
-        System.out.println(signInDTO.getEmail());
+    @PostMapping("/signin")
+    public ResponseEntity<?> signIn(@RequestBody SignInDTO signInDTO) throws NoSuchAlgorithmException {
         
         return ResponseEntity.ok(userService.signIn(signInDTO));
     }

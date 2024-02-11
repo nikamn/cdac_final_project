@@ -1,5 +1,13 @@
 package com.acts.service;
 
-public class AuthenticationService {
+import com.acts.model.AuthenticationToken;
+import com.acts.model.User;
+
+public interface AuthenticationService {
+
+    void saveConfirmationToken(AuthenticationToken authenticationToken);
+
+    AuthenticationToken getToken(User user);
+
     
 }
