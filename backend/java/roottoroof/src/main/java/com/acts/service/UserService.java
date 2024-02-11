@@ -1,12 +1,14 @@
 package com.acts.service;
 
 
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 
 
 import com.acts.dto.ApiResponse;
 import com.acts.dto.ResponseDTO;
 import com.acts.dto.user.SignInDTO;
+import com.acts.dto.user.SignInResponseDTO;
 import com.acts.dto.user.SignupDTO;
 import com.acts.dto.user.UserDTO;
 
@@ -27,7 +29,7 @@ public interface UserService {
 
     public ResponseDTO signUp(SignupDTO signupDTO);
     
-    public ApiResponse signIn(SignInDTO signInDTO);
+    public SignInResponseDTO signIn(SignInDTO signInDTO) throws NoSuchAlgorithmException;
 
 }
 
