@@ -1,13 +1,19 @@
+import { Route, Routes } from "react-router-dom";
 import "./App.css";
-import Footer from "./components/Footer";
-import Header from "./components/Header";
+import Layout from "./components/Layout";
+import Home from "./pages/Home";
+import Login from "./pages/Login";
+import Signup from "./pages/Signup";
 
 function App() {
   return (
-    <>
-      <Header />
-      <Footer />
-    </>
+    <Routes>
+      <Route path="/" element={<Layout />}>
+        <Route index element={<Home />} />
+        <Route path="login" element={<Login />} />
+        <Route path="signup" element={<Signup />} />
+      </Route>
+    </Routes>
   );
 }
 
