@@ -1,17 +1,22 @@
 package com.acts.service.impl;
 
+import java.security.MessageDigest;
+import java.security.NoSuchAlgorithmException;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
 import javax.transaction.Transactional;
+import javax.xml.bind.DatatypeConverter;
 
 import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.acts.custom_exceptions.CustomException;
 import com.acts.custom_exceptions.ResourceNotFoundException;
 import com.acts.dto.ApiResponse;
+import com.acts.dto.ResponseDTO;
 import com.acts.dto.user.SignInDTO;
 import com.acts.dto.user.SignupDTO;
 import com.acts.dto.user.UserDTO;
@@ -91,17 +96,38 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public ApiResponse signUp(SignupDTO signupDTO) {
+    public ResponseDTO signUp(SignupDTO signupDTO) throws CustomException {
           
 
-        Optional<User> user = userRepository.findByEmail(signupDTO.getEmail());
+        Optional<User> findUser = userRepository.findByEmail(signupDTO.getEmail());
 
-        if(user.isPresent()){
-            return new ApiResponse("User is already registered");
+        if(findUser.isPresent()){
+            throw new CustomException("user already present");
         }
 
+        String encryptedPassword = ""; 
+        try{
+            encryptedPassword = hashPassword(signupDTO.getPassword());
+        }
+        catch(NoSuchAlgorithmException e){
+            e.printStackTrace();
+        }
+     
+        signupDTO.setPassword(encryptedPassword);
         userRepository.save(mapper.map(signupDTO, User.class));
-        return new ApiResponse("Registration successful");
+
+        return new ResponseDTO("success","dummy response");
+        
+    }
+
+    private String hashPassword(String password) throws NoSuchAlgorithmException {
+        MessageDigest md = MessageDigest.getInstance("MD5");
+        md.update(password.getBytes());
+        byte [] digest = md.digest();
+        String hash = DatatypeConverter.printHexBinary(digest).toUpperCase();
+
+        return hash;
+        
     }
 
     @Override

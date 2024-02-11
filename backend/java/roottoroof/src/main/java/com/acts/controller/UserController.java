@@ -65,7 +65,7 @@ public class UserController {
         return ResponseEntity.ok(userService.deleteUser(id));
     }
 
-    // http://host:port/api/users/signyp , method=POST
+    // http://host:port/api/users/signup , method=POST
     @PostMapping("/signup")
     public ResponseEntity<?> SignUp(@RequestBody SignupDTO signupDTO){
         return ResponseEntity.ok(userService.signUp(signupDTO));
