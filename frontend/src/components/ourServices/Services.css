@@ -1,0 +1,15 @@
+.services-section {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 50px 10%;
+  background-color: #f2eee9;
+}
+
+.services-container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
