@@ -5,6 +5,7 @@ import java.util.List;
 
 
 import com.acts.dto.ApiResponse;
+import com.acts.dto.ResponseDTO;
 import com.acts.dto.user.SignInDTO;
 import com.acts.dto.user.SignupDTO;
 import com.acts.dto.user.UserDTO;
@@ -24,7 +25,7 @@ public interface UserService {
 
     public ApiResponse deleteUser(Integer id);
 
-    public ApiResponse signUp(SignupDTO signupDTO);
+    public ResponseDTO signUp(SignupDTO signupDTO);
     
     public ApiResponse signIn(SignInDTO signInDTO);
 
