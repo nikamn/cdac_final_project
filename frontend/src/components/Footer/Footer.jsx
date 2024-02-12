@@ -1,7 +1,7 @@
 
 
 const Footer = () => (
-  <footer className="py-3 my-4">
+  <footer className="py-3 my-4 w-100">
     <ul className="nav justify-content-center border-bottom pb-3 mb-3">
       <li className="nav-item">
         <a href="#" className="nav-link px-2 text-muted">

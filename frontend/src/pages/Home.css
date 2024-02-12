@@ -3,9 +3,11 @@
     opacity: 0;
     transform: translateX(-10rem);
   }
+
   80% {
     transform: translateX(1rem);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0);
@@ -17,9 +19,11 @@
     opacity: 0;
     transform: translateX(10rem);
   }
+
   80% {
     transform: translateX(-1rem);
   }
+
   100% {
     opacity: 1;
     transform: translateX(0);
@@ -31,6 +35,7 @@
     opacity: 0;
     transform: translateY(3rem);
   }
+
   100% {
     opacity: 1;
     transform: translate(0);
@@ -38,7 +43,7 @@
 }
 
 /* for immeadiate h2 in home section */
-.home section > h2 {
+.home section>h2 {
   margin-bottom: 1rem;
   border-bottom: 3px solid #043a3a;
   padding-bottom: 10px;
@@ -57,12 +62,13 @@
 }
 
 @media only screen and (min-resolution: 192dpi) and (min-width: 37.5em),
-  (-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),
-  (min-width: 125em) {
+(-webkit-min-device-pixel-ratio: 2) and (min-width: 37.5em),
+(min-width: 125em) {
   .hero__section {
     background-image: url("../assets/background_banner.png");
   }
 }
+
 @media only screen and (max-width: 37.5em) {
   .hero__section {
     -webkit-clip-path: polygon(0 0, 100% 0, 100% 85vh, 0 100%);
@@ -83,6 +89,7 @@
   backface-visibility: hidden;
   margin-bottom: 6rem;
 }
+
 .heading-primary--main {
   display: block;
   font-size: 4rem;
@@ -92,12 +99,14 @@
   animation-duration: 1s;
   animation-timing-function: ease-out;
 }
+
 @media only screen and (max-width: 37.5em) {
   .heading-primary--main {
     letter-spacing: 1rem;
     /* font-size: 5rem; */
   }
 }
+
 .heading-primary--sub {
   margin: 30px;
   text-align: center;
@@ -112,16 +121,17 @@
   /* letter-spacing: 1.75rem; */
   animation: moveInRight 1s ease-out;
 }
+
 @media only screen and (max-width: 37.5em) {
   .heading-primary--sub {
     letter-spacing: 0.5rem;
   }
 }
 
-//----------------------
-button {
+#---------------------- button {
   background-color: transparent;
 }
+
 .cta-btn {
   background-color: transparent;
   border: 1px solid #fff;
@@ -131,14 +141,16 @@ button {
   animation: moveInBottom 1s ease-out;
   cursor: pointer;
 }
+
 .cta-btn:hover {
   transform: translateY(3px);
   box-shadow: 0 4px 4px 0 rgba(0, 0, 0, 0.25);
 }
-//------------image
-.hero__imageBox img {
+
+#------------image .hero__imageBox img {
   width: 100%;
 }
+
 .hero__imageBox {
   /* width: 50%; */
   height: auto;
@@ -148,6 +160,7 @@ button {
   /*left: 50%;
   transform: translate(-50%, -50%); */
 }
+
 .hero__imageBox img {
   width: 100%;
   max-width: 900px;

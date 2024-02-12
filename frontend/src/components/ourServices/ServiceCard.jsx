@@ -1,5 +1,6 @@
 /* eslint-disable react/prop-types */
 import "./ServiceCard.css";
+
 function ServiceCard({ service }) {
   return (
     <div className="service-card">

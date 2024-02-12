@@ -1,10 +1,11 @@
 import missionImage1 from "../../assets/mission/mission-image1.png";
 import missionImage2 from "../../assets/mission/mission-image2.png";
 import missionImage3 from "../../assets/mission/mission-image4.png";
-import "./Mission.css";
 import organicMakingIcon from "../../assets/mission/organic-making-icon.png";
 import certifiedProductIcon from "../../assets/mission/certified-products-icon.png";
 import fastDeliveryIcon from "../../assets/mission/fast-delivery-icon.png";
+
+import "./Mission.css";
 
 const Mission = () => {
   return (

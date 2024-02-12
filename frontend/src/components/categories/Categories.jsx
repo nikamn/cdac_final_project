@@ -1,8 +1,9 @@
 // Categories.js
-import "./Categories.css";
+
 import CategoryCard from "./CategoryCard";
 import categoriesData from "../../data/categoriesData";
-// ... import other images ...
+
+import "./Categories.css";
 
 const Categories = () => {
   return (
