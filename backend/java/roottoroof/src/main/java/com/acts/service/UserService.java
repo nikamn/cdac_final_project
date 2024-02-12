@@ -7,9 +7,9 @@ import java.util.List;
 
 import com.acts.dto.ApiResponse;
 import com.acts.dto.ResponseDTO;
-import com.acts.dto.user.SignInDTO;
-import com.acts.dto.user.SignInResponseDTO;
-import com.acts.dto.user.SignupDTO;
+import com.acts.dto.user.SigninRequest;
+import com.acts.dto.user.SigninResponse;
+import com.acts.dto.user.SignupRequest;
 import com.acts.dto.user.UserDTO;
 
 public interface UserService {
@@ -27,9 +27,9 @@ public interface UserService {
 
     public ApiResponse deleteUser(Integer id);
 
-    public ResponseDTO signUp(SignupDTO signupDTO);
+    public ResponseDTO signUp(SignupRequest signupDTO);
     
-    public SignInResponseDTO signIn(SignInDTO signInDTO) throws NoSuchAlgorithmException;
+    public SigninResponse signIn(SigninRequest signInDTO) throws NoSuchAlgorithmException;
 
 }
 

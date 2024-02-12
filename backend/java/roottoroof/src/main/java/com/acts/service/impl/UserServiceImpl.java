@@ -19,9 +19,9 @@ import com.acts.custom_exceptions.CustomException;
 import com.acts.custom_exceptions.ResourceNotFoundException;
 import com.acts.dto.ApiResponse;
 import com.acts.dto.ResponseDTO;
-import com.acts.dto.user.SignInDTO;
-import com.acts.dto.user.SignInResponseDTO;
-import com.acts.dto.user.SignupDTO;
+import com.acts.dto.user.SigninRequest;
+import com.acts.dto.user.SigninResponse;
+import com.acts.dto.user.SignupRequest;
 import com.acts.dto.user.UserDTO;
 import com.acts.model.Address;
 import com.acts.model.AuthenticationToken;
@@ -70,6 +70,20 @@ public class UserServiceImpl implements UserService {
 
     public UserDTO createUser(UserDTO userDTO) {
 
+        Optional<User> findUser = userRepository.findByEmail(userDTO.getEmail());
+
+        if (findUser.isPresent()) {
+            throw new CustomException("user already present");
+        }
+
+        String encryptedPassword = "";
+        try {
+            encryptedPassword = hashPassword(userDTO.getPassword());
+        } catch (NoSuchAlgorithmException e) {
+            e.printStackTrace();
+        }
+
+        userDTO.setPassword(encryptedPassword);
         User user = mapper.map(userDTO, User.class);
         User savedUser = userRepository.save(user);
         return mapper.map(savedUser, UserDTO.class);
@@ -82,7 +96,7 @@ public class UserServiceImpl implements UserService {
 
         mapper.map(userDTO, user);
         userRepository.save(user);
-        userDTO.setId(id); 
+        userDTO.setId(id);
 
         return userDTO;
 
@@ -105,69 +119,64 @@ public class UserServiceImpl implements UserService {
 
     @Override
     @Transactional
-    public ResponseDTO signUp(SignupDTO signupDTO) throws CustomException {
-          
+    public ResponseDTO signUp(SignupRequest signupDTO) throws CustomException {
 
         Optional<User> findUser = userRepository.findByEmail(signupDTO.getEmail());
 
-        if(findUser.isPresent()){
+        if (findUser.isPresent()) {
             throw new CustomException("user already present");
         }
 
-        String encryptedPassword = ""; 
-        try{
+        String encryptedPassword = "";
+        try {
             encryptedPassword = hashPassword(signupDTO.getPassword());
-        }
-        catch(NoSuchAlgorithmException e){
+        } catch (NoSuchAlgorithmException e) {
             e.printStackTrace();
         }
-     
+
         signupDTO.setPassword(encryptedPassword);
         User user = mapper.map(signupDTO, User.class);
         userRepository.save(user);
 
+        // creating the token
+        final AuthenticationToken authenticationToken = new AuthenticationToken(user);
 
-       // creating the token 
-       final AuthenticationToken authenticationToken = new AuthenticationToken(user);
+        authenticationService.saveConfirmationToken(authenticationToken);
 
-       authenticationService.saveConfirmationToken(authenticationToken);
+        return new ResponseDTO("success", "user created successfully..!!");
 
-        return new ResponseDTO("success","user created successfully..!!");
-        
     }
 
     private String hashPassword(String password) throws NoSuchAlgorithmException {
         MessageDigest md = MessageDigest.getInstance("MD5");
         md.update(password.getBytes());
-        byte [] digest = md.digest();
+        byte[] digest = md.digest();
         String hash = DatatypeConverter.printHexBinary(digest).toUpperCase();
 
         return hash;
-        
+
     }
 
     @Override
-    public SignInResponseDTO signIn(SignInDTO signInDTO) throws NoSuchAlgorithmException {
-         
-        //finding the user by email 
-         Optional<User> user = userRepository.findByEmail(signInDTO.getEmail());
-         if(!user.isPresent()){
-            throw new AuthenticationFailException("user is not registered yet..!!");
-         }
-        
-       
-        if(!user.get().getPassword().equals(hashPassword(signInDTO.getPassword()))){
-             throw new AuthenticationFailException("Invalid Password..!!");
-        }
-        
-        AuthenticationToken token =  authenticationService.getToken(user.get());
+    public SigninResponse signIn(SigninRequest signInDTO) throws NoSuchAlgorithmException {
 
-        if(Objects.isNull(token)){
+        // finding the user by email
+        Optional<User> user = userRepository.findByEmail(signInDTO.getEmail());
+        if (!user.isPresent()) {
+            throw new AuthenticationFailException("user is not registered yet..!!");
+        }
+
+        if (!user.get().getPassword().equals(hashPassword(signInDTO.getPassword()))) {
+            throw new AuthenticationFailException("Invalid Password..!!");
+        }
+
+        AuthenticationToken token = authenticationService.getToken(user.get());
+
+        if (Objects.isNull(token)) {
             throw new CustomException("token is not Present");
         }
 
-        return new SignInResponseDTO("sucess",token.getToken());
-        
+        return new SigninResponse("sucess", token.getToken());
 
     }
 }

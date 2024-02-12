@@ -14,6 +14,7 @@ import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
@@ -22,13 +23,12 @@ import lombok.NoArgsConstructor;
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
+@Builder
 public class AuthenticationToken {
-    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name = "id")
     private Integer id;
-
 
     private String token;
 
@@ -39,12 +39,10 @@ public class AuthenticationToken {
     @JoinColumn(nullable = false, name = "user_id")
     private User user;
 
-
-    public AuthenticationToken(User user){
+    public AuthenticationToken(User user) {
         this.user = user;
         this.createdDate = new Date();
         this.token = UUID.randomUUID().toString();
     }
-
 
 }

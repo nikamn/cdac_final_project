@@ -16,23 +16,23 @@ import org.springframework.context.annotation.Bean;
 @SpringBootApplication
 public class Application {
 
-    public static void main(String[] args) {
-        SpringApplication.run(Application.class, args);
-    }
+	public static void main(String[] args) {
+		SpringApplication.run(Application.class, args);
+	}
 
-    @Bean // equivalent to <bean id ..../> in xml file
+	@Bean
 	public ModelMapper modelMapper() {
 		ModelMapper modelMapper = new ModelMapper();
 		modelMapper.getConfiguration().setMatchingStrategy(MatchingStrategies.STRICT)
-				.setPropertyCondition(Conditions.isNotNull());// only non null properties will be transferred from src
-		// --> dest , during the mapping
+				.setPropertyCondition(Conditions.isNotNull());
 		modelMapper.addConverter(new StringToDateConverter());
 		return modelMapper;
 	}
-    public class StringToDateConverter extends AbstractConverter<String,LocalDate> {
-	    @Override
-	    protected LocalDate convert(String source) {
-	        return LocalDate.parse(source);
-	    }
+
+	public class StringToDateConverter extends AbstractConverter<String, LocalDate> {
+		@Override
+		protected LocalDate convert(String source) {
+			return LocalDate.parse(source);
+		}
 	}
 }

@@ -1,16 +1,17 @@
 package com.acts.dto.user;
 
 import lombok.AllArgsConstructor;
+import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-@AllArgsConstructor
 @Data
-public class SignInResponseDTO {
+@AllArgsConstructor
+@NoArgsConstructor
+@Builder
+public class SigninResponse {
 
     private String status;
     private String token;
-
 
 }
