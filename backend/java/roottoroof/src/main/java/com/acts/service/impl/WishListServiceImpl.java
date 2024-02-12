@@ -14,7 +14,6 @@ import com.acts.model.User;
 import com.acts.model.WishList;
 import com.acts.repository.WishListRepository;
 import com.acts.service.AuthenticationService;
-import com.acts.service.ProductService;
 import com.acts.service.WishListService;
 
 @Service
@@ -26,9 +25,6 @@ public class WishListServiceImpl implements WishListService {
 
     @Autowired
     private AuthenticationService authenticationService;
-
-    @Autowired 
-    private ProductService productService;
 
     @Autowired
     private ModelMapper mapper;

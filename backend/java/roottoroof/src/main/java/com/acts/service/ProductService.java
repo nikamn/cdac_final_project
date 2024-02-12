@@ -1,11 +1,9 @@
 package com.acts.service;
 
 import java.util.List;
-import java.util.function.Function;
 
 import com.acts.dto.ApiResponse;
 import com.acts.dto.product.ProductDTO;
-import com.acts.model.Product;
 
 public interface ProductService {
 
