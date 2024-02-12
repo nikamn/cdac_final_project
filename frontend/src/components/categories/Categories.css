@@ -1,0 +1,39 @@
+
+.categories-section {
+  margin: 10% 0 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 5% 10%;
+}
+
+.categories-container {
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+}
+
+/*-------------- categories__section ----------------*/
+/* .categories__section {
+  margin-top: 15%;
+  position: relative;
+  text-align: center;
+  margin: 5% 0;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 10px 10%;
+}
+*/
+
+
+/*
+@media screen and (max-width: 768px) {
+  .categories__section > h2 {
+    font-size: 3rem;
+  }
+} */
