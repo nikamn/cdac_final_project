@@ -13,9 +13,17 @@ import javax.persistence.ManyToOne;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
 @Entity
 @Table(name = "wishlist")
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class WishList {
+
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,4 +39,12 @@ public class WishList {
     @ManyToOne
     @JoinColumn(name = "product_id")
     private Product product;
+
+    
+    public WishList(User user, Product product) {
+       this.user = user;
+       this.product = product;
+       this.createdDate = new Date();
+    }
+
 }
