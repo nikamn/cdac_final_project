@@ -105,9 +105,10 @@ public class ProductServiceImpl implements ProductService {
         return new ApiResponse("Product " + id + " deleted @...!");
     }
 
-    Function<Product, ProductDTO> getProductDTOFromProduct = product -> {
+    public Function<Product, ProductDTO> getProductDTOFromProduct = product -> {
         ProductDTO productDTO = mapper.map(product, ProductDTO.class);
         productDTO.setCategoryId(product.getCategory().getId());
         return productDTO;
     };
+
 }

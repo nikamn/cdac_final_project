@@ -9,5 +9,9 @@ public interface AuthenticationService {
 
     AuthenticationToken getToken(User user);
 
+    void authenticate(String token);
+
+    User getUser(String token);
+
     
 }
