@@ -111,4 +111,11 @@ public class ProductServiceImpl implements ProductService {
         return productDTO;
     };
 
+    @Override
+    public Product findById(Integer productId) {
+         
+        return productRepository.findById(productId)
+                        .orElseThrow(()-> new ResourceNotFoundException("Product Not Exists.!!"));
+    }
+
 }
