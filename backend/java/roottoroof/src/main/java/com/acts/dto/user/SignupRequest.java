@@ -38,8 +38,7 @@ public class SignupRequest {
     private String password;
 
     @NotBlank
-    @NumberFormat
-    @Pattern(regexp = "(^$|[0-9]{10})")
+    @Pattern(regexp = "^[0-9]{10}$", message = "Please enter a 10-digit number")
     private String mobileNo;
 
 }

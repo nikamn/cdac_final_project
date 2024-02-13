@@ -1,14 +1,33 @@
 import React, { useState } from "react";
+import { useNavigate } from 'react-router-dom';
+
+import axios from "../../api/axios";
 
 export const Signup = (props) => {
+  const [firstName, setFirstName] = useState("");
+  const [lastName, setLastName] = useState("");
+  const [username, setUserName] = useState("");
   const [email, setEmail] = useState("");
-  const [pass, setPass] = useState("");
-  const [name, setName] = useState("");
-  const [num, setNum] = useState("");
+  const [password, setPassword] = useState("");
+  const [mobileNo, setMobileNo] = useState("");
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
-    console.log(email);
+
+    const response = await axios.post("/signup", {
+      firstName,
+      lastName,
+      username,
+      email,
+      password,
+      mobileNo,
+    });
+
+    console.log(response);
+
+    navigate("/signin");
   };
 
   return (
@@ -18,35 +37,38 @@ export const Signup = (props) => {
         className="register-form w-50 m-auto border p-4 rounded-3"
         onSubmit={handleSubmit}
       >
-        <label htmlFor="name">First name</label>
+        <label htmlFor="firstName">First Name</label>
         <input
-          value={name}
-          name="name"
-          onChange={(e) => setName(e.target.value)}
-          id="name"
-          placeholder="first Name"
+          value={firstName}
+          name="firstName"
+          onChange={(e) => setFirstName(e.target.value)}
+          id="firstName"
+          placeholder="First Name"
           className="mb-3"
           autoFocus
         />
-        <label htmlFor="name">Last name</label>
+
+        <label htmlFor="lastName">Last Name</label>
         <input
-          value={name}
-          name="name"
-          onChange={(e) => setName(e.target.value)}
-          id="name"
+          value={lastName}
+          name="lastName"
+          onChange={(e) => setLastName(e.target.value)}
+          id="lastName"
           placeholder="Last Name"
           className="mb-3"
         />
-        <label htmlFor="email">Username</label>
+
+        <label htmlFor="username">Username</label>
         <input
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          type="email"
-          placeholder="youremail@gmail.com"
-          id="email"
-          name="email"
+          value={username}
+          onChange={(e) => setUserName(e.target.value)}
+          type="username"
+          placeholder="username"
+          id="username"
+          name="username"
           className="mb-3"
         />
+
         <label htmlFor="email">Email</label>
         <input
           value={email}
@@ -57,10 +79,11 @@ export const Signup = (props) => {
           name="email"
           className="mb-3"
         />
+
         <label htmlFor="password">password</label>
         <input
-          value={pass}
-          onChange={(e) => setPass(e.target.value)}
+          value={password}
+          onChange={(e) => setPassword(e.target.value)}
           type="password"
           placeholder="********"
           id="password"
@@ -68,14 +91,15 @@ export const Signup = (props) => {
           className="mb-3"
         />
 
-        <label htmlFor="number">Phone number</label>
+        <label htmlFor="mobileNo">Mobile Number</label>
         <input
-          value={num}
-          onChange={(e) => setNum(e.target.value)}
-          type="number"
+          value={mobileNo}
+          onChange={(e) => setMobileNo(e.target.value)}
+          type="mobileNo"
           placeholder="********"
-          id="number"
-          name="number"
+          id="mobileNo"
+          name="mobileNo"
+          //pattern="/^[0-9]{10}$/"
           className="mb-3"
         />
         <button type="submit" className="btn btn-outline-primary">

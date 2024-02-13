@@ -1,14 +1,37 @@
 import React, { useState } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
+
+import axios from "../../api/axios";
+// import axios from "axios";
 
 export const Signin = (props) => {
   const [email, setEmail] = useState("");
   const [pass, setPass] = useState("");
 
-  const handleSubmit = (e) => {
+  const navigate = useNavigate();
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     console.log(email);
     console.log(pass);
+
+    const response = await axios.post("/signin", {
+      email,
+      password: pass,
+    });
+
+    // axios
+    //   .post("http://localhost:8085/api/users/signin", {
+    //     email: email,
+    //     password: pass,
+    //   })
+    //   .then((response) => {
+    //     console.log(response);
+    //   });
+
+    console.log(response);
+
+    navigate("/");
   };
 
   return (
