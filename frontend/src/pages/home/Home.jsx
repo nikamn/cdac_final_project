@@ -1,9 +1,9 @@
 import LazyLoad from "react-lazyload";
-import heroImage from "../assets/vegetables.jpg";
+import heroImage from "../../assets/vegetables.jpg";
 import "./Home.css";
-import Categories from "../components/categories/Categories";
-import Services from "../components/ourServices/Services";
-import Mission from "../components/Mission/Mission";
+import Categories from "../../components/categories/Categories";
+import Services from "../../components/ourServices/Services";
+import Mission from "../../components/Mission/Mission";
 
 function Home() {
   return (

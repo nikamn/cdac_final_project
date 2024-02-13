@@ -13,7 +13,7 @@ const Mission = () => {
       <div className="mission-description">
         <h2>Our Mission: Cultivating Green Lifestyles</h2>
         <p className="mission-statement">
-          At GreenLife Gardens, we believe in fostering a connection with nature
+          At RootToRoof, we believe in fostering a connection with nature
           and promoting sustainable living through terrace gardening. Our
           mission is to provide expert guidance, quality products, and a
           supportive community, empowering individuals to embrace the joy of
