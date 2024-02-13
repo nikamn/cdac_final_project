@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.acts.dto.ApiResponse;
 import com.acts.dto.product.ProductDTO;
+import com.acts.model.Product;
 
 public interface ProductService {
 
@@ -18,5 +19,7 @@ public interface ProductService {
     public ProductDTO updateProduct(Integer id, ProductDTO updatedProductDTO);
 
     public ApiResponse deleteProduct(Integer id);
+
+    public Product findById(Integer productId);
 
 }
