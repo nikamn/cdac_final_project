@@ -101,5 +101,10 @@ public class CartServiceImpl implements CartService {
 
 
     }
+
+    @Override
+    public void deleteUserCartItems(User user) {
+        cartRepository.deleteByUser(user);
+    }
     
 }

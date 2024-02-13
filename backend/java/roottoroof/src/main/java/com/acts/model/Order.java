@@ -29,6 +29,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class Order {
 
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -39,11 +40,16 @@ public class Order {
     @Column(name = "total_price")
     private Double totalPrice;
 
-    @OneToMany(mappedBy = "order", fetch = FetchType.LAZY)
+     @Column(name = "session_id")
+    private String sessionId;
+
+    @OneToMany(mappedBy = "order", fetch = FetchType.EAGER)
     private List<OrderItem> orderItems;
 
     @ManyToOne
     @JoinColumn(name = "user_id", referencedColumnName = "id")
     @JsonIgnore
     private User user;
+    
+
 }
