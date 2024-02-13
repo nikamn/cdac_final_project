@@ -176,7 +176,7 @@ public class UserServiceImpl implements UserService {
             throw new CustomException("token is not Present");
         }
 
-        return new SigninResponse("sucess", token.getToken());
+        return new SigninResponse(user.get(), "sucess", token.getToken());
 
     }
 }
