@@ -15,5 +15,10 @@ public interface OrderService {
 
     List<Order> listOrders(String token);
 
+    Order getOrder(Integer id, String token);
+
+    void cancelOrder(Integer id, String token);
+
+    List<Order> getAllCancelOrders(String token);
     
 } 

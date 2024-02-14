@@ -6,4 +6,8 @@ import com.acts.model.OrderItem;
 
 public interface OrderItemsRepository extends JpaRepository<OrderItem, Integer> {
 
+    void deleteByProductId(Integer id);
+
+    void deleteByOrderId(Integer orderId);
+
 }
