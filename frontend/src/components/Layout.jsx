@@ -7,11 +7,13 @@ import "bootstrap/dist/css/bootstrap.min.css";
 
 function Layout() {
   return (
-    <>
+    <div className="app-wrapper">
       <Header />
-      <Outlet />
+      <div className="content">
+        <Outlet />
+      </div>
       <Footer />
-    </>
+    </div>
   );
 }
 
