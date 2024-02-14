@@ -26,9 +26,17 @@ export const Signin = () => {
     console.log("Form Data:", formData);
 
     const response = await axios.post("/users/signin", formData);
+    
     console.log(response);
+    
+    if((response.data.user.role)==="ADMIN"){
+      navigate("/admin")
+    }else{
+      navigate("/");
+    }
 
-    navigate("/");
+    
+    
   };
 
   return (
