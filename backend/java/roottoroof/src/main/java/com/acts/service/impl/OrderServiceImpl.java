@@ -2,6 +2,7 @@ package com.acts.service.impl;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +10,7 @@ import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.acts.custom_exceptions.OrderNotFoundException;
 import com.acts.dto.cart.CartDTO;
 import com.acts.dto.cart.CartItemDTO;
 import com.acts.dto.checkout.CheckoutItemDTO;
@@ -44,6 +46,8 @@ public class OrderServiceImpl implements OrderService {
 
     @Autowired
     OrderItemsRepository orderItemsRepository;
+
+    HashMap<String,List<Order>> cancelOrders = new HashMap<>();
     
 
     @Value("${BASE_URL}")
@@ -68,6 +72,7 @@ public class OrderServiceImpl implements OrderService {
 
         // for each product compute SessionCreateParams.LineItem
         for (CheckoutItemDTO checkoutItemDTO : checkoutItemDTOList) {
+            System.out.println("In create session");
             sessionItemsList.add(createSessionLineItem(checkoutItemDTO));
         }
 
@@ -85,6 +90,7 @@ public class OrderServiceImpl implements OrderService {
 
      // build each product in the stripe checkout page
     LineItem createSessionLineItem(CheckoutItemDTO checkoutItemDTO) {
+        System.out.println("In create sessionLineItem");
         return SessionCreateParams.LineItem.builder()
                 // set price for each product
                 .setPriceData(createPriceData(checkoutItemDTO))
@@ -94,13 +100,16 @@ public class OrderServiceImpl implements OrderService {
     }
 
     // create total price
-    LineItem.PriceData createPriceData(CheckoutItemDTO checkoutItemDto) {
+    LineItem.PriceData createPriceData(CheckoutItemDTO checkoutItemDTO) {
+
+        System.out.println("In price  Data");
+        System.out.println(checkoutItemDTO.getPrice());
         return  PriceData.builder()
-                .setCurrency("inr")
-                .setUnitAmount((long)(checkoutItemDto.getPrice()*100))
+                .setCurrency("usd")
+                .setUnitAmount((long)(checkoutItemDTO.getPrice()*100))
                 .setProductData(
                                  PriceData.ProductData.builder()
-                                .setName(checkoutItemDto.getProductName())
+                                .setName(checkoutItemDTO.getProductName())
                                 .build())
                 .build();
     }
@@ -108,6 +117,7 @@ public class OrderServiceImpl implements OrderService {
 
     @Override
     public void placeOrder(String token, String sessionId) {
+        
         authenticationService.authenticate(token);
         User user = authenticationService.getUser(token);
 
@@ -116,11 +126,13 @@ public class OrderServiceImpl implements OrderService {
 
         List<CartItemDTO> cartItemDTOList = cartDTO.getCartItems();
 
-        // create the order and save it
+        // create the order and save it.
+        System.out.println("create the order and save it.");
         Order newOrder = new Order();
         newOrder.setCreatedDate(new Date());
         newOrder.setSessionId(sessionId);
         newOrder.setUser(user);
+        System.out.println(cartDTO.getTotalCost());
         newOrder.setTotalPrice(cartDTO.getTotalCost());
         orderRepository.save(newOrder);
 
@@ -134,6 +146,9 @@ public class OrderServiceImpl implements OrderService {
             orderItem.setOrder(newOrder);
 
             // add to order item list
+            System.out.println(orderItem.getProduct().getProductName());
+            System.out.println(orderItem.getPrice());
+            
             orderItemsRepository.save(orderItem);
         }
         
@@ -153,6 +168,49 @@ public class OrderServiceImpl implements OrderService {
         return orderRepository.findAllByUserOrderByCreatedDateDesc(user);
 
     }
+
+
+    @Override
+    public Order getOrder(Integer orderId,String token) throws OrderNotFoundException {
+        authenticationService.authenticate(token);
+        return orderRepository.findById(orderId).orElseThrow(()->new OrderNotFoundException("Order not found"));
+    }
+
+
+    @Override
+    public void cancelOrder(Integer orderId, String token) {
+        
+        authenticationService.authenticate(token);
+        Order order = orderRepository.findById(orderId).orElseThrow(()->  new OrderNotFoundException("Order not found"));
+        orderItemsRepository.deleteByOrderId(orderId);  
+        
+        List<Order> list = cancelOrders.get(token);
+        if(list!=null) {
+             list.add(order);
+             cancelOrders.put(token, list);
+        }
+        else{
+            list = new ArrayList<>();
+            list.add(order);
+            cancelOrders.put(token, list);
+        }
+        System.out.println(cancelOrders.get(token).get(0).getId());
+        orderRepository.deleteById(orderId);
+
+    }
+
+
+    @Override
+    public List<Order> getAllCancelOrders(String token) {
+       
+        authenticationService.authenticate(token);
+        if(cancelOrders.containsKey(token)){
+            return cancelOrders.get(token);
+        }
+        return null;
+    }
+
+    
     
 
 }
