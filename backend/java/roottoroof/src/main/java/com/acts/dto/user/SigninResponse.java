@@ -16,5 +16,4 @@ public class SigninResponse {
     private UserDTO user;
     private String status;
     private String token;
-
 }

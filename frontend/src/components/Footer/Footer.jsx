@@ -29,7 +29,7 @@ const Footer = () => (
         </a>
       </li>
     </ul>
-    <p className="text-center text-muted">© 2022 Company, Inc</p>
+    <p className="text-center text-muted">© 2023 CDAC-ACTS, Group Number : 15</p>
   </footer>
 );
 

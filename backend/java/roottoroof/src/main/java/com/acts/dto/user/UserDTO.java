@@ -1,5 +1,7 @@
 package com.acts.dto.user;
 
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotBlank;
 
@@ -39,5 +41,8 @@ public class UserDTO {
 
     @NotBlank
     private String mobileNo;
+
+    @Enumerated(EnumType.STRING)
+    private String role;
 
 }
