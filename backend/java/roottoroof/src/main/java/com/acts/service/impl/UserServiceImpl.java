@@ -170,12 +170,17 @@ public class UserServiceImpl implements UserService {
             throw new AuthenticationFailException("Invalid Password..!!");
         }
 
+
         AuthenticationToken token = authenticationService.getToken(user.get());
 
         if (Objects.isNull(token)) {
             throw new CustomException("token is not Present");
         }
+
         UserDTO userDetails = mapper.map(user.get(), UserDTO.class);
+
+
+
         return new SigninResponse(userDetails, "success", token.getToken());
 
     }
