@@ -1,6 +1,6 @@
 package com.acts.dto.user;
 
-import com.acts.model.User;
+// import com.acts.model.User;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -13,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Builder
 public class SigninResponse {
 
-    private User user;
+    private UserDTO user;
     private String status;
     private String token;
 
