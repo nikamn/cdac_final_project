@@ -20,5 +20,10 @@ public class ExceptionContollerAdvice {
     public final ResponseEntity<String> handleAuthenticationFailedException(AuthenticationFailException exception){
         return new ResponseEntity<>(exception.getMessage(),HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(value = OrderNotFoundException.class)
+    public final ResponseEntity<String> handleOrderNotFoundException(OrderNotFoundException exception){
+        return new ResponseEntity<>(exception.getMessage(),HttpStatus.NOT_FOUND);
+    }
     
 }
