@@ -175,8 +175,8 @@ public class UserServiceImpl implements UserService {
         if (Objects.isNull(token)) {
             throw new CustomException("token is not Present");
         }
-
-        return new SigninResponse(user.get(), "sucess", token.getToken());
+        UserDTO userDetails = mapper.map(user.get(), UserDTO.class);
+        return new SigninResponse(userDetails, "success", token.getToken());
 
     }
 }
