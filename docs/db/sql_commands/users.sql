@@ -1,4 +1,5 @@
-INSERT INTO users (id, first_name, last_name, username, email, password, mobile_no) VALUES
+INSERT INTO users (id, first_name, last_name, username, email, password, mobile_no) 
+VALUES
 (1, 'John', 'Doe', 'johndoe', 'johndoe@example.com', 'password123', '1234567890'),
 (2, 'Jane', 'Smith', 'janesmith', 'janesmith@example.com', 'jane123', '9999999999'),
 (3, 'Michael', 'Johnson', 'michaelj', 'michaelj@example.com', 'securepassword', '6776776767'),

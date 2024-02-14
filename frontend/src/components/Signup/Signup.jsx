@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
 import axios from "../../api/axios";
 
@@ -104,7 +104,7 @@ function SignupForm() {
         <button type="submit">Sign Up</button>
       </form>
       <p className="login-link">
-        Already have an account? <a href="signin">Sign In</a>
+        Already have an account? <Link to="/signin">Sign In</Link>
       </p>
     </div>
   );

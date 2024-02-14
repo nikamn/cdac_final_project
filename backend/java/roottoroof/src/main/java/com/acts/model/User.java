@@ -15,6 +15,7 @@ import javax.persistence.Table;
 
 import com.acts.enums.Role;
 import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -45,11 +46,12 @@ public class User {
     @Column(unique = true)
     private String email;
 
+    @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
     @Enumerated(EnumType.STRING)
     @Builder.Default
-    private Role role= Role.valueOf("USER");
+    private Role role = Role.valueOf("USER");
 
     @Column(name = "mobile_no")
     private String mobileNo;

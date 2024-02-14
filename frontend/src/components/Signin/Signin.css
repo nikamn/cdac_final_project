@@ -57,3 +57,32 @@ button:hover {
 .small-link:hover {
     text-decoration: underline;
 }
+
+/* styles.css (or any other CSS file you are using) */
+.para-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 20px;
+    /* Adjust the margin as needed */
+}
+
+.para-container p {
+    font-size: 12px;
+    /* Adjust the font size as needed */
+    color: #666;
+    /* Adjust the color as needed */
+}
+
+.para-container .right {
+    text-align: right;
+}
+
+.para-container a {
+    color: #007bff;
+    /* Adjust the link color as needed */
+    text-decoration: none;
+}
+
+.para-container a:hover {
+    text-decoration: underline;
+}

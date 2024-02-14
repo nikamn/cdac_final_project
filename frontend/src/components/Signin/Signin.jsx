@@ -1,7 +1,8 @@
 import { useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 
-import axios from "../../api/axios";
+//import axios from "../../api/axios";
+import AuthService from "../../services/AuthService";
 
 import "./Signin.css";
 
@@ -25,10 +26,15 @@ export const Signin = () => {
     e.preventDefault();
     console.log("Form Data:", formData);
 
-    const response = await axios.post("/users/signin", formData);
-    console.log(response);
+    //const response = await axios.post("/users/signin", formData);
+    const response = await AuthService.login(formData);
+    console.log(response.data);
 
-    navigate("/");
+    if (response.data.user.role === "ADMIN") {
+      navigate("/admin");
+    } else {
+      navigate("/");
+    }
   };
 
   return (
@@ -56,10 +62,19 @@ export const Signin = () => {
           />
         </div>
         <button type="submit">Sign In</button>
-        <a href="#" className="small-link">
+        {/* <a href="#" className="small-link">
           Forgot Password?
-        </a>
+        </a> */}
       </form>
+
+      <div className="para-container">
+        <p>
+          <Link href="#">Forgot password?</Link>
+        </p>
+        <p className="right">
+          Don&apos;t have an account? <Link to="/signup">Sign Up</Link>
+        </p>
+      </div>
     </div>
   );
 
