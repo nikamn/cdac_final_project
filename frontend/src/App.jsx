@@ -12,6 +12,7 @@ import ToolsAndEquipments from "./pages/toolsEquipments/ToolsAndEquipments";
 
 import "./App.css";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
+import Products from "./components/Products/Products";
 
 function App() {
   return (
@@ -25,6 +26,7 @@ function App() {
         <Route path="cart" element={<Cart />} />
         <Route path="wishlist" element={<Wishlist />} />
         <Route path="profile" element={<ProfilePage />} />
+        <Route path="products" element={<Products />} />
       </Route>
     </Routes>
   );

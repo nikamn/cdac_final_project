@@ -1,15 +1,13 @@
 import { useState } from "react";
+
+import axios from "../../api/axios";
+import AuthService from "../../services/AuthService";
+
 import "./ProfilePage.css";
 
 function ProfilePage() {
-  // Sample user data
-  const [userData, setUserData] = useState({
-    firstName: "",
-    lastName: "",
-    username: "",
-    email: "",
-    mobileNo: "",
-  });
+  const user = AuthService.getUser();
+  const [userData, setUserData] = useState(user);
 
   const [formData, setFormData] = useState({ ...userData });
 
@@ -21,7 +19,10 @@ function ProfilePage() {
   const handleSubmit = (e) => {
     e.preventDefault();
     setUserData({ ...formData });
-    // Submit form data to the server or perform any other necessary actions
+    console.log(formData);
+
+    const response = axios.put(`/users/${formData.id}`, formData);
+    console.log("After update: ", response);
   };
 
   return (
