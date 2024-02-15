@@ -13,6 +13,8 @@ import ToolsAndEquipments from "./pages/toolsEquipments/ToolsAndEquipments";
 import "./App.css";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
 import Products from "./components/Products/Products";
+import AdminDashBoard from "./components/Admin/AdminHome";
+import { AdminDashFail,AdminDashSuccess } from "./components/Admin/AdminDashBoard/AdminDashBoard";
 
 function App() {
   return (
@@ -27,6 +29,7 @@ function App() {
         <Route path="wishlist" element={<Wishlist />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="products" element={<Products />} />
+        <Route path="admin" element={<AdminDashBoard />} />
       </Route>
     </Routes>
   );
