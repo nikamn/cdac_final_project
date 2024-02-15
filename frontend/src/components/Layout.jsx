@@ -9,9 +9,9 @@ function Layout() {
   return (
     <div className="app-wrapper">
       <Header />
-      <div className="content">
+      {/* <div className="content"> */}
         <Outlet />
-      </div>
+      {/* </div> */}
       <Footer />
     </div>
   );
