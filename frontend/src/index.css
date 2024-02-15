@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+.about-us-bg-img {
+  background-image: url("../../assets/aboutus/about-us-bg.png") !important;
+}
+
 *,
 *::after,
 *::before {
@@ -24,6 +28,7 @@ h4,
 h5,
 h6 {
   font-family: "Libre Baskerville", serif;
+  color: #023f3a;
 }
 
 html {
