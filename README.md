@@ -1,4 +1,4 @@
-## Organic Food Based E-commerce Web App
+## RootToRoof -An Organic Food-Based E-commerce Web App
 
 An e-commerce web application targeting health enthusiasts. The web application will act as a platform for providing solutions (e.g.- organic seeds dispatching, rooftop gardening equipment) and services(e.g.- terrace-gardening experts, setting up a gardening layout based on customer requirements, soil checking and treatment) for a home-based organic kitchen garden. The e-commerce web application targets health enthusiasts. 
 
