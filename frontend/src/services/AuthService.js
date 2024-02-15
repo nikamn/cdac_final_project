@@ -27,7 +27,7 @@ const isLoggedIn = () => {
 };
 
 const getUser = () => {
-  return JSON.parse(sessionStorage.getItem("userData"));
+  return JSON.parse(sessionStorage.getItem("userData")).user;
 };
 
 const AuthService = { login, logout, isLoggedIn, getUser };
