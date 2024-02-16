@@ -56,7 +56,8 @@ public class UserController {
     // http://host:port/api/users/{id} , method=PUT
     @PutMapping("/{id}")
     public ResponseEntity<?> updateUser(@PathVariable Integer id, @RequestBody @Valid UserDTO updatedUser) {
-
+        System.out.println(id);
+        System.out.println(updatedUser.toString());
         return ResponseEntity.ok(userService.updateUser(id, updatedUser));
     }
 
