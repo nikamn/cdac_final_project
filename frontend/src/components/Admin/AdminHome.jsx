@@ -1,8 +1,13 @@
 import { useState } from "react";
+import { AdminDashFail,AdminDashSuccess } from "./AdminDashBoard/AdminDashBoard";
 
+import ProductService from "../../services/ProductService";
 import AuthService from "../../services/AuthService";
 
-import { AdminDashFail,AdminDashSuccess } from "./AdminDashBoard/AdminDashBoard";
+
+
+
+
 
 
 export const AdminDashBoard = () => {
@@ -12,7 +17,7 @@ export const AdminDashBoard = () => {
   
   let dashboardContent;  
   
-  if(userData.role==="ADMIN"){
+  if(userData.role==="ROLE_ADMIN"){
     dashboardContent = <AdminDashSuccess></AdminDashSuccess>;
   }else{
     dashboardContent = <AdminDashFail></AdminDashFail>;
