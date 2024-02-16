@@ -21,7 +21,14 @@ function ProfilePage() {
     setUserData({ ...formData });
     console.log(formData);
 
-    const response = axios.put(`/users/${formData.id}`, formData);
+    const accessToken = JSON.parse(sessionStorage.getItem("userData")).token;
+    console.log(accessToken);
+
+    const config = {
+      headers: { Authorization: `Bearer ${accessToken}` },
+    };
+
+    const response = axios.put(`/users/${formData.id}`, formData, config);
     console.log("After update: ", response);
   };
 

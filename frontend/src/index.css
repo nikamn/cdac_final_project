@@ -15,7 +15,8 @@
 }
 
 body {
-  font-family: "Josefin Sans", sans-serif;
+  /* font-family: "Josefin Sans", sans-serif; */
+  font-family: "Roboto", sans-serif;
   background-color: #fff;
   color: #525560;
   box-sizing: border-box;
@@ -32,7 +33,7 @@ h6 {
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 75%;
 }
 
 @media only screen and (max-width: 75em) {
