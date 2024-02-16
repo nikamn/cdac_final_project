@@ -45,17 +45,24 @@ public class AddressServiceImpl implements AddressService {
 	@Override
 	public ApiResponse assignUserAddress(Integer customerId, AddressDTO address) {
 
+		System.out.println(customerId);
+		System.out.println(address.toString());
 
 		User customer = customerRepository.findById(customerId)
 		                 .orElseThrow(()-> new ResourceNotFoundException("invaid customer id"));
         
-		// map dtp --> entity
+
+		System.out.println(customer.toString());
+
+		// map dto --> entity
 		Address addressEntity = mapper.map(address, Address.class);
         
+		System.out.println(addressEntity.toString());
+
 		// establish un dir link , adr ---> emp
 		addressEntity.setOwner(customer);
 		// save adr details
-
+		System.out.println(addressEntity.toString());
         adrRepo.save(addressEntity);
 		
 		return new ApiResponse("Assigned new Address to Customer,"+ customer.getFirstName());
