@@ -1,4 +1,4 @@
-import { config } from "@fortawesome/fontawesome-svg-core";
+
 import axios from "../api/axios";
 
 const getToken = () => {
