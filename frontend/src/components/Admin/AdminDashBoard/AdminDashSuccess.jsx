@@ -5,13 +5,16 @@ import { Link, Outlet } from "react-router-dom";
 const AdminDashSuccess = () => {
   const [allproducts, setAllProducts] = useState([]);
 
-  const [searchProducts, setSearchProducts] = useState();
+  const [displayProducts, setDisplayProducts] = useState([]);
+
+  const [searchText, setSearchText] = useState("");
 
   const fetchAllFromDatabase = () => {
     ProductService.getAllProducts()
       .then((result) => {
         console.log("View All: ", result);
         setAllProducts([...result.data]);
+        setDisplayProducts([...result.data]);
       })
       .catch((err) => {
         console.log("Error in view fetch all " + err);
@@ -19,23 +22,9 @@ const AdminDashSuccess = () => {
       });
   };
 
-useEffect(
-  () => {
+  useEffect(() => {
     fetchAllFromDatabase();
-  },  
-  []
-  )
-
-
-  //  //Button action to show all products
-  // const viewAll = () => {
-  //   fetchAllFromDatabase();
-  // };
-
-  // //Button action to show Single Product
-  // const viewOne = () => {
-  //   ProductService.getProductById(1);
-  // };
+  }, []);
 
   const deleteProduct = (productId) => {
     ProductService.deleteProductById(productId)
@@ -49,19 +38,36 @@ useEffect(
       });
   };
 
+
+  useEffect(()=>{
+if(searchText!==""){
+  let searchedProduct = allproducts.filter(p=>p.productName.includes(searchText));
+  setDisplayProducts([...searchedProduct]);
+}else{
+  if(allproducts.length>0){
+    setDisplayProducts([...allproducts])
+  }
+}
+  }, [searchText])
+
+  const handleChange = (e)=>{
+    setSearchText(e.target.value);
+  }
+
   return (
     <div>
-      <h1 className="text-center mb-3">Welcome to Project Management</h1>
+      <h1 className="text-center mb-3 ">Welcome to Project Management</h1>
 
-      {/* <button
-        type="button"
-        name="btn_get_all"
-        id="get_all"
-        className="btn btn-info mb-3"
-        onClick={viewAll}
-      >
-        Get all products
-      </button> */}
+      <div>
+        <form>
+          <div className="w-3/5 mx-auto">
+            <div className="flex flex-wrap">
+              <label htmlFor="search"> Search Product</label>
+              <input type="text" name="input_search" id="search" value={searchText} onChange={handleChange} />
+            </div>
+          </div>
+        </form>
+      </div>
 
       <table className="table table-striped">
         <thead>
@@ -78,7 +84,7 @@ useEffect(
         </thead>
 
         <tbody>
-          {allproducts.map((product) => (
+          {displayProducts.map((product) => (
             <tr className="text-center" key={product.id}>
               <th>{product.id}</th>
               <td>{product.productName}</td>
