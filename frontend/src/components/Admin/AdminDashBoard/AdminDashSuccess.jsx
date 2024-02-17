@@ -1,19 +1,8 @@
 import ProductService from "../../../services/ProductService";
 import { useState } from "react";
+import {Link, Outlet} from "react-router-dom"
 
-export const AdminDashFail = () => {
-  return (
-    <div>
-      <h1>You have not logged in</h1>
-      <br />
-      <a href="signin">Click here to Log In as Admin</a>
-    </div>
-  );
-};
-
-
-
-export const AdminDashSuccess = () => {
+const AdminDashSuccess = () => {
   const [allproducts, setAllProducts] = useState([]);
 
   const fetchAllFromDatabase = () => {
@@ -52,9 +41,9 @@ export const AdminDashSuccess = () => {
 
   return (
     <div>
-      <h1>Welcome Admin</h1>
-      <br />
-      <h1>Yaha pr alag alag buttons</h1>
+      
+
+      <h1 className="text-center">Welcome to Project Management</h1>
 
       <button
         type="button"
@@ -80,6 +69,7 @@ export const AdminDashSuccess = () => {
             <th scope="col">Product Quantity</th>
             <th scope="col">Product Category Id</th>
             <th scope="col">Product Image URL</th>
+            <th scope="col">Product Description</th>
             <th colSpan={3}>Product Action</th>
           </tr>
         </thead>
@@ -93,6 +83,7 @@ export const AdminDashSuccess = () => {
               <td>{product.quantity}</td>
               <td>{product.categoryId}</td>
               <td>{product.imageUrl}</td>
+              <td>{product.description}</td>
               <td>
                 <button
                   type="button"
@@ -104,6 +95,7 @@ export const AdminDashSuccess = () => {
                 </button>
               </td>
               <td>
+                <Link to={`/admin/editProduct/${product.id}`} state={{editProduct:product}}>
                 <button
                   type="button"
                   id="update"
@@ -112,6 +104,7 @@ export const AdminDashSuccess = () => {
                 >
                   Update
                 </button>
+                </Link>
               </td>
               <td>
                 <button
@@ -130,6 +123,10 @@ export const AdminDashSuccess = () => {
           ))}
         </tbody>
       </table>
+
+      <Outlet></Outlet>
     </div>
   );
 };
+
+export default AdminDashSuccess;

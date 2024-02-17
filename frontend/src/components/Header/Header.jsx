@@ -11,6 +11,7 @@ import {
   faShoppingCart,
   faUser,
 } from "@fortawesome/free-solid-svg-icons";
+import AuthService from "../../services/AuthService";
 
 function Header() {
   const [isDropdownOpen, setDropdownOpen] = useState(false);
@@ -18,6 +19,8 @@ function Header() {
   const toggleDropdown = () => {
     setDropdownOpen(!isDropdownOpen);
   };
+
+  const user = AuthService.getUser();
 
   return (
     <>
@@ -39,25 +42,33 @@ function Header() {
             </Nav.Link>
           </Nav>
           <Nav>
-            <Nav.Link as={Link} to="/signup">
-              Sign Up
-            </Nav.Link>
-            <Nav.Link as={Link} to="/signin">
-              Sign In
-            </Nav.Link>
-
-            <NavDropdown
-              title={<FontAwesomeIcon icon={faUser} />}
-              id="basic-nav-dropdown"
-              show={isDropdownOpen}
-              onMouseEnter={toggleDropdown}
-              onMouseLeave={toggleDropdown}
-            >
-              <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-              <NavDropdown.Item href="/#settings">Settings</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="#signout">Sign Out</NavDropdown.Item>
-            </NavDropdown>
+            {user == null ? (
+              <>
+                <Nav.Link as={Link} to="/signup">
+                  Sign Up
+                </Nav.Link>
+                <Nav.Link as={Link} to="/signin">
+                  Sign In
+                </Nav.Link>
+              </>
+            ) : (
+              <NavDropdown
+                title={<FontAwesomeIcon icon={faUser} />}
+                id="basic-nav-dropdown"
+                show={isDropdownOpen}
+                onMouseEnter={toggleDropdown}
+                onMouseLeave={toggleDropdown}
+              >
+                <NavDropdown.Item as={Link} to="/profile">
+                  Profile
+                </NavDropdown.Item>
+                <NavDropdown.Item href="/#settings">Settings</NavDropdown.Item>
+                <NavDropdown.Divider />
+                <NavDropdown.Item as={Link} to="/" onClick={AuthService.logout}>
+                  Sign Out
+                </NavDropdown.Item>
+              </NavDropdown>
+            )}
 
             <Nav.Link as={Link} to="/wishlist" className="wishlist-icon">
               <FontAwesomeIcon icon={faHeart} />

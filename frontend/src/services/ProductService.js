@@ -46,9 +46,12 @@ const addNewProduct = async (product) => {
     });
 };
 
-const updateProductById = async (product) => {
+const updateProduct = async (product) => {
+  const token = getToken();
   return axios
-    .put("/products/" + product.productId, { product })
+    .put("/products/" + product.id, product, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
     .then((response) => {
       console.log("Respose from updateProductById --->" + response);
     })
@@ -80,7 +83,7 @@ const ProductService = {
   getAllProducts,
   getProductById,
   addNewProduct,
-  updateProductById,
+  updateProduct,
   deleteProductById,
 };
 
