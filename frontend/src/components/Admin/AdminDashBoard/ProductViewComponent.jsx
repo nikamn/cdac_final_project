@@ -1,10 +1,34 @@
-const ProductViewComponent=()=>{
+import { useLocation } from "react-router-dom";
 
-    return (
-        <div>
-            <h1>ya pr product ka detail</h1>
-        </div>
-    )
-}
+
+
+const ProductViewComponent = () => {
+
+    const location = useLocation();
+
+    const [productDetails, setProductDetails] = useState({
+        id: "",
+        productName: "",
+        price: "",
+        quantity: "",
+        categoryId: "",
+        imageUrl: "",
+        description: "",
+      });
+
+
+      useEffect(() => {
+        setProductDetails({ ...location.state.viewProduct });
+      }, []);
+
+
+      
+
+
+
+  return (
+   <div></div>
+  );
+};
 
 export default ProductViewComponent;

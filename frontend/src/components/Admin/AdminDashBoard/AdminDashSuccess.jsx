@@ -1,18 +1,18 @@
 import ProductService from "../../../services/ProductService";
 import { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
+import CategoriesService from "../../../services/CategoriesService";
 
 const AdminDashSuccess = () => {
   const [allproducts, setAllProducts] = useState([]);
-
   const [displayProducts, setDisplayProducts] = useState([]);
-
+  const [allCategories, setAllCategories] = useState([]);
   const [searchText, setSearchText] = useState("");
 
-  const fetchAllFromDatabase = () => {
+  const fetchAllProducts = () => {
     ProductService.getAllProducts()
       .then((result) => {
-        console.log("View All: ", result);
+        console.log("View All Products: ", result);
         setAllProducts([...result.data]);
         setDisplayProducts([...result.data]);
       })
@@ -22,15 +22,28 @@ const AdminDashSuccess = () => {
       });
   };
 
+  const fetchAllCategories = () => {
+    CategoriesService.getAllCategories()
+      .then((result) => {
+        console.log("View All Categories: ", result);
+        setAllCategories([...result.data]);
+      })
+      .catch((err) => {
+        console.log("Error in view fetch all " + err);
+        throw err;
+      });
+  };
+
   useEffect(() => {
-    fetchAllFromDatabase();
+    fetchAllProducts();
+    fetchAllCategories();
   }, []);
 
   const deleteProduct = (productId) => {
     ProductService.deleteProductById(productId)
       .then((data) => {
         console.log(data);
-        fetchAllFromDatabase();
+        fetchAllProducts();
       })
       .catch((err) => {
         console.log("Error in view all button " + err);
@@ -38,32 +51,55 @@ const AdminDashSuccess = () => {
       });
   };
 
+  useEffect(() => {
+    if (searchText !== "") {
+      let searchedProduct = allproducts.filter(
+        (p) =>
+          p.productName.includes(searchText) ||
+          p.productName.toLowerCase().includes(searchText)
+      );
+      setDisplayProducts([...searchedProduct]);
+    } else {
+      if (allproducts.length > 0) {
+        setDisplayProducts([...allproducts]);
+      }
+    }
+  }, [searchText]);
 
-  useEffect(()=>{
-if(searchText!==""){
-  let searchedProduct = allproducts.filter(p=>p.productName.includes(searchText));
-  setDisplayProducts([...searchedProduct]);
-}else{
-  if(allproducts.length>0){
-    setDisplayProducts([...allproducts])
-  }
-}
-  }, [searchText])
-
-  const handleChange = (e)=>{
+  const handleChange = (e) => {
     setSearchText(e.target.value);
-  }
+  };
+
+  const findCategoryNameById = (id) => {
+    return allCategories.filter((item) => item.id === id)[0].categoryName;
+  };
 
   return (
     <div>
       <h1 className="text-center mb-3 ">Welcome to Project Management</h1>
 
-      <div>
+      <div className="container">
         <form>
           <div className="w-3/5 mx-auto">
-            <div className="flex flex-wrap">
+            <div>
               <label htmlFor="search"> Search Product</label>
-              <input type="text" name="input_search" id="search" value={searchText} onChange={handleChange} />
+            </div>
+            {/* <div>
+              <label htmlFor="category">Search Criteria</label>
+              <select name="select_category" id="category">                
+                {
+                  allCategories.map((category)=>(<option></option>))
+                }
+              </select>
+            </div> */}
+            <div>
+              <input
+                type="text"
+                name="input_search"
+                id="search"
+                value={searchText}
+                onChange={handleChange}
+              />
             </div>
           </div>
         </form>
@@ -76,7 +112,7 @@ if(searchText!==""){
             <th scope="col">Product Name</th>
             <th scope="col">Product Price</th>
             <th scope="col">Product Quantity</th>
-            <th scope="col">Product Category Id</th>
+            <th scope="col">Product Category Name</th>
             <th scope="col">Product Image URL</th>
             <th scope="col">Product Description</th>
             <th colSpan={3}>Product Action</th>
@@ -90,11 +126,11 @@ if(searchText!==""){
               <td>{product.productName}</td>
               <td>{product.price}</td>
               <td>{product.quantity}</td>
-              <td>{product.categoryId}</td>
+              <td>{findCategoryNameById(product.categoryId)}</td>
               <td>{product.imageUrl}</td>
               <td>{product.description}</td>
               <td>
-                <Link
+                {/* <Link
                   to={`/admin/viewProduct/${product.id}`}
                   state={{ viewProduct: product }}
                 >
@@ -106,7 +142,7 @@ if(searchText!==""){
                   >
                     View
                   </button>
-                </Link>
+                </Link> */}
               </td>
               <td>
                 <Link
