@@ -16,6 +16,7 @@ import "./App.css";
 import ProfilePage from "./components/ProfilePage/ProfilePage";
 import Products from "./components/Products/Products";
 import ProductUpdateComponent from "./components/Admin/AdminDashBoard/ProductUpdateComponent";
+import ProductViewComponent from "./components/Admin/AdminDashBoard/ProductViewComponent";
 import AdminHome from "./components/Admin/AdminHome";
 import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
 import AdminDashSuccess from "./components/Admin/AdminDashBoard/AdminDashSuccess";
@@ -53,6 +54,10 @@ function App() {
             <Route
               path="editProduct/:id"
               element={<ProductUpdateComponent />}
+            />
+            <Route
+              path="viewProduct/:id"
+              element={<ProductViewComponent />}
             />
           </Route>
         )}
