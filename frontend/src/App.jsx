@@ -1,4 +1,4 @@
-import "bootstrap/dist/css/bootstrap.min.css";
+// import "bootstrap/dist/css/bootstrap.min.css";
 
 import { Route, Routes } from "react-router-dom";
 
@@ -37,13 +37,25 @@ function App() {
         <Route path="wishlist" element={<Wishlist />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="products" element={<Products />} />
-        {user && <Route path="admin" element={<AdminHome />}>
-          <Route path="dashboard" element={user.role === "ROLE_ADMIN" ? (<AdminDashSuccess />) : (<AdminDashFailure />)}>
-              
+
+        {user && (
+          <Route path="admin" element={<AdminHome />}>
+            <Route
+              path="dashboard"
+              element={
+                user.role === "ROLE_ADMIN" ? (
+                  <AdminDashSuccess />
+                ) : (
+                  <AdminDashFailure />
+                )
+              }
+            />
+            <Route
+              path="editProduct/:id"
+              element={<ProductUpdateComponent />}
+            />
           </Route>
-          <Route path="editProduct/:id" element={<ProductUpdateComponent />}></Route>
-          
-        </Route>}
+        )}
       </Route>
     </Routes>
   );

@@ -1,6 +1,6 @@
 import ProductService from "../../../services/ProductService";
 import { useState } from "react";
-import {Link, Outlet} from "react-router-dom"
+import { Link, Outlet } from "react-router-dom";
 
 const AdminDashSuccess = () => {
   const [allproducts, setAllProducts] = useState([]);
@@ -41,23 +41,16 @@ const AdminDashSuccess = () => {
 
   return (
     <div>
-      
-
-      <h1 className="text-center">Welcome to Project Management</h1>
+      <h1 className="text-center mb-3">Welcome to Project Management</h1>
 
       <button
         type="button"
         name="btn_get_all"
         id="get_all"
-        className="btn btn-info"
+        className="btn btn-info mb-3"
         onClick={viewAll}
       >
-        {" "}
         Get all products
-      </button>
-      <button type="button" name="btn_get_all" id="get_all" onClick={viewOne}>
-        {" "}
-        Get single product
       </button>
 
       <table className="table table-striped">
@@ -89,21 +82,24 @@ const AdminDashSuccess = () => {
                   type="button"
                   id="view"
                   name="btn_view"
-                  className="btn btn-success "
+                  className="btn btn-outline-success"
                 >
                   View
                 </button>
               </td>
               <td>
-                <Link to={`/admin/editProduct/${product.id}`} state={{editProduct:product}}>
-                <button
-                  type="button"
-                  id="update"
-                  name="btn_update"
-                  className="btn btn-info"
+                <Link
+                  to={`/admin/editProduct/${product.id}`}
+                  state={{ editProduct: product }}
                 >
-                  Update
-                </button>
+                  <button
+                    type="button"
+                    id="update"
+                    name="btn_update"
+                    className="btn btn-outline-info"
+                  >
+                    Update
+                  </button>
                 </Link>
               </td>
               <td>
@@ -111,7 +107,7 @@ const AdminDashSuccess = () => {
                   type="button"
                   id="delete"
                   name="btn_delete"
-                  className="btn btn-danger"
+                  className="btn btn-outline-danger"
                   onClick={() => {
                     deleteProduct(product.id);
                   }}
