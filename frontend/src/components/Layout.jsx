@@ -9,7 +9,7 @@ import Header2 from "./Header/Header2";
 function Layout() {
   return (
     <div className="app-wrapper">
-      <Header2 />
+      <Header />
       {/* <div className="content"> */}
       <Outlet />
       {/* </div> */}

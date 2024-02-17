@@ -1,9 +1,11 @@
 import ProductService from "../../../services/ProductService";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 
 const AdminDashSuccess = () => {
   const [allproducts, setAllProducts] = useState([]);
+
+  const [searchProducts, setSearchProducts] = useState();
 
   const fetchAllFromDatabase = () => {
     ProductService.getAllProducts()
@@ -17,15 +19,23 @@ const AdminDashSuccess = () => {
       });
   };
 
-  //Button action to show all products
-  const viewAll = () => {
+useEffect(
+  () => {
     fetchAllFromDatabase();
-  };
+  },  
+  []
+  )
 
-  //Button action to show Single Product
-  const viewOne = () => {
-    ProductService.getProductById(1);
-  };
+
+  //  //Button action to show all products
+  // const viewAll = () => {
+  //   fetchAllFromDatabase();
+  // };
+
+  // //Button action to show Single Product
+  // const viewOne = () => {
+  //   ProductService.getProductById(1);
+  // };
 
   const deleteProduct = (productId) => {
     ProductService.deleteProductById(productId)
@@ -43,7 +53,7 @@ const AdminDashSuccess = () => {
     <div>
       <h1 className="text-center mb-3">Welcome to Project Management</h1>
 
-      <button
+      {/* <button
         type="button"
         name="btn_get_all"
         id="get_all"
@@ -51,7 +61,7 @@ const AdminDashSuccess = () => {
         onClick={viewAll}
       >
         Get all products
-      </button>
+      </button> */}
 
       <table className="table table-striped">
         <thead>
@@ -78,14 +88,19 @@ const AdminDashSuccess = () => {
               <td>{product.imageUrl}</td>
               <td>{product.description}</td>
               <td>
-                <button
-                  type="button"
-                  id="view"
-                  name="btn_view"
-                  className="btn btn-outline-success"
+                <Link
+                  to={`/admin/viewProduct/${product.id}`}
+                  state={{ viewProduct: product }}
                 >
-                  View
-                </button>
+                  <button
+                    type="button"
+                    id="view"
+                    name="btn_view"
+                    className="btn btn-outline-success"
+                  >
+                    View
+                  </button>
+                </Link>
               </td>
               <td>
                 <Link
