@@ -17,9 +17,14 @@ const AdminHome = () => {
     <div className="w-4/5 mx-auto">
       <h1 className="mt-5">Welcome Admin</h1>
       <br />
-      <Link to="dashboard">
+      <Link to="productDashboard">
         <button type="button" className="btn btn-outline-primary mb-5">
           Product Management
+        </button>
+      </Link>
+      <Link to="categoryDashboard">
+        <button type="button" className="btn btn-outline-primary mb-5">
+          Category Management
         </button>
       </Link>
       <Outlet />

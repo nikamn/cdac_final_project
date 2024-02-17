@@ -22,6 +22,9 @@ import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
 import AdminDashSuccess from "./components/Admin/AdminDashBoard/AdminDashSuccess";
 import { AdminDashFailure } from "./components/Admin/AdminDashBoard/AdminDashFailure";
 import AuthService from "./services/AuthService";
+import AdminCategorySuccess from "./components/Admin/AdminDashBoard/AdminCategorySuccess";
+import AdminCategoryFail from "./components/Admin/AdminDashBoard/AdminCategoryFail";
+import CategoryUpdateComponent from "./components/Admin/AdminDashBoard/CategoryUpdateComponent";
 
 function App() {
   const user = AuthService.getUser();
@@ -41,8 +44,10 @@ function App() {
 
         {user && (
           <Route path="admin" element={<AdminHome />}>
+
+            {/*Product Management Routes*/}
             <Route
-              path="dashboard"
+              path="productDashboard"
               element={
                 user.role === "ROLE_ADMIN" ? (
                   <AdminDashSuccess />
@@ -59,6 +64,22 @@ function App() {
               path="viewProduct/:id"
               element={<ProductViewComponent />}
             />
+
+            {/*Category Management Routes*/}
+            <Route
+              path="categoryDashboard"
+              element={
+                user.role === "ROLE_ADMIN" ? (
+                  <AdminCategorySuccess />
+                ) : (
+                  <AdminCategoryFail />
+                )
+              }
+            />
+            <Route
+              path="editCategory/:id"
+              element={<CategoryUpdateComponent />}
+            />            
           </Route>
         )}
       </Route>
