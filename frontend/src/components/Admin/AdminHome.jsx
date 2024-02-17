@@ -9,6 +9,10 @@ const AdminHome = () => {
     window.location.reload;
   }, [user]);
 
+
+
+  
+
   return (
     <div className="w-4/5 mx-auto">
       <h1 className="mt-5">Welcome Admin</h1>
