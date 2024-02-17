@@ -38,7 +38,6 @@ const AddressForm = ({
             mt-1
             border-gray-300
             text-black
-            
             rounded-md
             shadow-sm
             focus:border-indigo-300
