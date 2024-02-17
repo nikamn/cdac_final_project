@@ -54,9 +54,9 @@ function Header() {
               onMouseLeave={toggleDropdown}
             >
               <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-              <NavDropdown.Item href="/#settings">Settings</NavDropdown.Item>
+              <NavDropdown.Item href="/settings">Settings</NavDropdown.Item>
               <NavDropdown.Divider />
-              <NavDropdown.Item href="#signout">Sign Out</NavDropdown.Item>
+              <NavDropdown.Item href="/signout">Sign Out</NavDropdown.Item>
             </NavDropdown>
 
             <Nav.Link as={Link} to="/wishlist" className="wishlist-icon">

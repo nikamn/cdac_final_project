@@ -4,11 +4,12 @@ import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 
 import "bootstrap/dist/css/bootstrap.min.css";
+import Header2 from "./Header/Header2";
 
 function Layout() {
   return (
     <div className="app-wrapper">
-      <Header />
+      <Header2 />
       {/* <div className="content"> */}
         <Outlet />
       {/* </div> */}
