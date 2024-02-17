@@ -122,7 +122,7 @@ const AdminDashSuccess = () => {
         <tbody>
           {displayProducts.map((product) => (
             <tr className="text-center" key={product.id}>
-              <th>{product.id}</th>
+              <td>{product.id}</td>
               <td>{product.productName}</td>
               <td>{product.price}</td>
               <td>{product.quantity}</td>

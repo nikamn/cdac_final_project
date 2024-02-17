@@ -30,7 +30,7 @@ const ProductUpdateComponent = () => {
     ProductService.updateProduct(productDetails)
       .then((response) => {
         console.log(response);
-        navigate("/admin/dashboard");
+        navigate("/admin/productDashboard");
       })
       .catch((error) => {
         console.log(error);
