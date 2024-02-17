@@ -11,7 +11,7 @@ function Layout() {
     <div className="app-wrapper">
       <Header2 />
       {/* <div className="content"> */}
-        <Outlet />
+      <Outlet />
       {/* </div> */}
       <Footer />
     </div>
