@@ -1,5 +1,6 @@
 package com.acts.model;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.persistence.Column;
@@ -17,6 +18,8 @@ import javax.validation.constraints.NotNull;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
+import com.acts.repository.CategoryRepository;
+import com.acts.service.CategoryService;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -32,7 +35,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @Builder
 public class Product {
-
+   
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -62,5 +65,17 @@ public class Product {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
     private Category category;
+
+    
+    public Product(String desc, String imgURL, double price, String productName, int quantity, Category cat) {
+        this.description = desc;
+        this.imageURL = imgURL;
+        this.price = price;
+        this.productName = productName;
+        this.quantity = quantity;
+        this.category = cat;
+
+    }
+
 
 }
