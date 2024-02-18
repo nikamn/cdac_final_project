@@ -1,17 +1,9 @@
 import { Outlet, Link } from "react-router-dom";
 import AuthService from "../../services/AuthService";
-import { useEffect } from "react";
+
 
 const AdminHome = () => {
   const user = AuthService.getUser();
-
-  useEffect(() => {
-    window.location.reload;
-  }, [user]);
-
-
-
-  
 
   return (
     <div className="w-4/5 mx-auto">

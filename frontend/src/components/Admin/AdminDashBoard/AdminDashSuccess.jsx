@@ -84,14 +84,6 @@ const AdminDashSuccess = () => {
             <div>
               <label htmlFor="search"> Search Product</label>
             </div>
-            {/* <div>
-              <label htmlFor="category">Search Criteria</label>
-              <select name="select_category" id="category">                
-                {
-                  allCategories.map((category)=>(<option></option>))
-                }
-              </select>
-            </div> */}
             <div>
               <input
                 type="text"
@@ -103,6 +95,19 @@ const AdminDashSuccess = () => {
             </div>
           </div>
         </form>
+      </div>
+
+      <div className="w-1/6 mb-3 mt-3 ">
+        <Link to={`/admin/addProduct`}>
+          <button
+            type="button"
+            name="btn"
+            id="add"
+            className="btn btn-outline-dark"
+          >
+            Add New Product
+          </button>
+        </Link>
       </div>
 
       <table className="table table-striped">

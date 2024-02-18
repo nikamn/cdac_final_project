@@ -30,6 +30,7 @@ import CategoryUpdateComponent from "./components/Admin/AdminDashBoard/CategoryU
 import Checkout from "./components/Checkout/Checkout";
 import BlogPost from "./components/Blog/BlogPost";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
+import ProductAddComponent from "./components/Admin/AdminDashBoard/ProductAddComponent";
 
 function App() {
   const user = AuthService.getUser();
@@ -69,6 +70,7 @@ function App() {
               path="editProduct/:id"
               element={<ProductUpdateComponent />}
             />
+            <Route path="addProduct" element={<ProductAddComponent></ProductAddComponent>} />
             <Route path="viewProduct/:id" element={<ProductViewComponent />} />
 
             {/*Category Management Routes*/}
