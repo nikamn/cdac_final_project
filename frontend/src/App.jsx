@@ -29,6 +29,7 @@ import AuthService from "./services/AuthService";
 import AdminCategorySuccess from "./components/Admin/AdminDashBoard/AdminCategorySuccess";
 import AdminCategoryFail from "./components/Admin/AdminDashBoard/AdminCategoryFail";
 import CategoryUpdateComponent from "./components/Admin/AdminDashBoard/CategoryUpdateComponent";
+import Checkout from "./components/Checkout/Checkout";
 
 function App() {
   const user = AuthService.getUser();
@@ -48,6 +49,7 @@ function App() {
       
         <Route path="tools" element={<ToolsAndEquipments />} />
         <Route path="cart" element={<PlaceOrder />} />
+        <Route path="checkout" element={<Checkout />} />
         <Route path="wishlist" element={<Wishlist />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="products" element={<Products />} />
@@ -91,6 +93,7 @@ function App() {
               element={<CategoryUpdateComponent />}
             />            
           </Route>
+          
         )}
       </Route>
     </Routes>
