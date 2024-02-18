@@ -8,7 +8,7 @@ import { useContext } from "react";
 const CartItemCard = ({ item }) => {
   const { addToCart, removeFromCart } = useContext(CartContext);
   return (
-    <div className="w-full h-auto flex flex-col justify-evenly  border border-b-2 rounded-lg">
+    <div className="w-full h-auto flex flex-col justify-evenly border border-b-2 rounded-lg shadow-md bg-white">
       <div className="w-full flex gap-4 p-4 h-[100px]">
         <img
           src={item.thumbnail}

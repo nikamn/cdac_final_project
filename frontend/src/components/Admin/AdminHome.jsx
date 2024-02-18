@@ -1,31 +1,35 @@
-import { useState } from "react";
-
+import { Outlet, Link } from "react-router-dom";
 import AuthService from "../../services/AuthService";
+import { useEffect } from "react";
 
-import { AdminDashFail,AdminDashSuccess } from "./AdminDashBoard/AdminDashBoard";
-
-
-export const AdminDashBoard = () => {
-  
+const AdminHome = () => {
   const user = AuthService.getUser();
-  const [userData, setUserData] = useState(user);
-  
-  let dashboardContent;  
-  
-  if(userData.role==="ADMIN"){
-    dashboardContent = <AdminDashSuccess></AdminDashSuccess>;
-  }else{
-    dashboardContent = <AdminDashFail></AdminDashFail>;
-  }
+
+  useEffect(() => {
+    window.location.reload;
+  }, [user]);
+
+
 
   
+
   return (
-    <div>
-      <h1>Hello</h1>
+    <div className="w-4/5 mx-auto">
+      <h1 className="mt-5">Welcome Admin</h1>
       <br />
-      {dashboardContent}
+      <Link to="productDashboard">
+        <button type="button" className="btn btn-outline-primary mb-5">
+          Product Management
+        </button>
+      </Link>
+      <Link to="categoryDashboard">
+        <button type="button" className="btn btn-outline-primary mb-5">
+          Category Management
+        </button>
+      </Link>
+      <Outlet />
     </div>
   );
 };
 
-export default AdminDashBoard;
+export default AdminHome;

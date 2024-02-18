@@ -30,7 +30,7 @@ export const Signin = () => {
     const response = await AuthService.login(formData);
     console.log(response.data);
 
-    if (response.data.user.role === "ADMIN") {
+    if (response.data.user.role === "ROLE_ADMIN") {
       navigate("/admin");
     } else {
       navigate("/");
