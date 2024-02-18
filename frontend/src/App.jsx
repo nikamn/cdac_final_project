@@ -93,6 +93,7 @@ function App() {
               element={<CategoryUpdateComponent />}
             />            
           </Route>
+          
         )}
       </Route>
     </Routes>
