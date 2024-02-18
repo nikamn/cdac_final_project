@@ -29,6 +29,8 @@ import lombok.NoArgsConstructor;
 @Builder
 public class User {
 
+    
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -61,5 +63,15 @@ public class User {
     @JsonIgnore
     @OneToMany(mappedBy = "user", fetch = FetchType.LAZY)
     private List<Service> services;
+
+    public User(String firstName, String lastName, String userName, String email, String password,String mobileNo) {
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = userName;
+        this.email = email;
+        this.password = password;
+        this.mobileNo = mobileNo;
+     
+    }
 
 }
