@@ -21,8 +21,41 @@ function ProfilePage() {
     setUserData({ ...formData });
     console.log(formData);
 
-    const response = axios.put(`/users/${formData.id}`, formData);
-    console.log("After update: ", response);
+    const { token } = JSON.parse(sessionStorage.getItem("userData"));
+    console.log(token);
+
+    // const config = {
+    //   headers: { Authorization: `Bearer ${token}` },
+    // };
+
+    // axios.defaults.headers.common = {
+    //   Authorization: `Bearer ${{ token }}`,
+    // };
+
+    // const response = axios.put(`/users/${formData.id}`, formData);
+
+    console.log(`Bearer ${token}`);
+
+    // axios
+    //   .put({
+    //     headers: {
+    //       Authorization: `Bearer ${token}`,
+    //     },
+    //     method: "PUT",
+    //     url: `http://localhost:8085/api/users/${formData.id}`,
+    //     data: formData,
+    //   })
+    //   .then((response) => {
+    //     console.log(response.data);
+    //   });
+
+    axios.put(`/users/${formData.id}`, formData, {
+      headers: {
+        Authorization: "Bearer " + token,
+      },
+    });
+
+    //console.log("After update: ", response);
   };
 
   return (
