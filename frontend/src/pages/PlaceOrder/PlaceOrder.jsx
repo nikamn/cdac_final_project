@@ -1,4 +1,4 @@
-import Address from "../../components/Address/Adress";
+import Address from "../../components/Address/Address";
 import Cart from "../../components/Cart/Cart";
 
 const PlaceOrder = () => {
