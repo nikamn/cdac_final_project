@@ -26,10 +26,9 @@ const ProductUpdateComponent = () => {
     setProductDetails({ ...productDetails, [name]: value });
   };
 
-  const updateProduct = () => {
+  const updateProduct = () => {    
     ProductService.updateProduct(productDetails)
-      .then((response) => {
-        console.log(response);
+      .then((response) => {        
         navigate("/admin/productDashboard");
       })
       .catch((error) => {
