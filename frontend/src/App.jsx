@@ -3,7 +3,8 @@
 import { Route, Routes } from "react-router-dom";
 
 import Layout from "./components/Layout";
-import Signin from "./components/Signin/Signin";
+// import Signin from "./components/Signin/Signin";
+import Signin from "./components/Signin/Signin2";
 import Signup from "./components/Signup/Signup";
 
 import Wishlist from "./components/Wishlist/Wishlist";
