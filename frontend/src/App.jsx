@@ -10,6 +10,10 @@ import Wishlist from "./components/Wishlist/Wishlist";
 
 import Home from "./pages/home/Home";
 import AboutUs from "./pages/aboutUs/AboutUs";
+import BlogPage from "./pages/BlogPage/BlogPage";
+import BlogPost1 from "./pages/BlogPage/BlogPost1";
+import BlogPost2 from './pages/BlogPage/BlogPost2';
+import BlogPost3 from './pages/BlogPage/BlogPost3';
 import ToolsAndEquipments from "./pages/toolsEquipments/ToolsAndEquipments";
 
 import "./App.css";
@@ -25,6 +29,7 @@ import AuthService from "./services/AuthService";
 import AdminCategorySuccess from "./components/Admin/AdminDashBoard/AdminCategorySuccess";
 import AdminCategoryFail from "./components/Admin/AdminDashBoard/AdminCategoryFail";
 import CategoryUpdateComponent from "./components/Admin/AdminDashBoard/CategoryUpdateComponent";
+import Checkout from "./components/Checkout/Checkout";
 
 function App() {
   const user = AuthService.getUser();
@@ -36,8 +41,15 @@ function App() {
         <Route path="signin" element={<Signin />} />
         <Route path="signup" element={<Signup />} />
         <Route path="about" element={<AboutUs />} />
+        <Route path="blog" element={<BlogPage />} />
+
+        <Route path="/blog/post1" element={<BlogPost1 />} />
+        <Route path="/blog/post2" element={<BlogPost2 />} />
+        <Route path="/blog/post3" element={<BlogPost3 />} />
+      
         <Route path="tools" element={<ToolsAndEquipments />} />
         <Route path="cart" element={<PlaceOrder />} />
+        <Route path="checkout" element={<Checkout />} />
         <Route path="wishlist" element={<Wishlist />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="products" element={<Products />} />
@@ -81,6 +93,7 @@ function App() {
               element={<CategoryUpdateComponent />}
             />            
           </Route>
+          
         )}
       </Route>
     </Routes>

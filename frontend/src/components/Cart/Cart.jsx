@@ -5,7 +5,7 @@ import { CartContext } from "../../contexts/CartContext";
 import CartItemCard from "./CartItemCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faRemove, faShoppingCart } from "@fortawesome/free-solid-svg-icons";
-import { useMatch, useNavigate } from "react-router-dom";
+import { Link, useMatch, useNavigate } from "react-router-dom";
 export default function Cart() {
   const isCartActive = useMatch("/cart");
   const navigate = useNavigate();
@@ -78,9 +78,9 @@ export default function Cart() {
             ) : (
               <button
                 className="px-3 py-3 w-auto md:2-1/3 bg-amber-500 text-white text-lg sm:text-base  font-bold uppercase rounded hover:bg-amber-700 focus:outline-none focus:bg-amber-700"
-                onClick={() => navigate("/checkout")}
+                // onClick={() => navigate("/checkout")}
               >
-                check out
+                <Link to="/checkout">Checkout</Link>
               </button>
             )}
           </div>
