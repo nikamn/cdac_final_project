@@ -56,7 +56,7 @@ public class RootToRoof {
         driver.manage().window().maximize();
         
 
-        WebElement webElement = driver.findElement(By.linkText("Sign Up"));
+        WebElement webElement = driver.findElement(By.linkText("Sign up"));
 
         webElement.click();
         Thread.sleep(3000);
