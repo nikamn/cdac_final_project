@@ -55,14 +55,35 @@ public class RootToRoof {
         driver.get(url);
         driver.manage().window().maximize();
         
-
-        WebElement webElement = driver.findElement(By.linkText("Sign Up"));
+        WebElement webElement = driver.findElement(By.linkText("Sign up"));
 
         webElement.click();
         Thread.sleep(3000);
 
         String title = driver.getTitle();
         Assert.assertEquals(title, "RootToRoofOrganics");
+    }
+
+    @Test
+    public void verifySignIn() throws InterruptedException{
+        driver.get(url);
+        driver.manage().window().maximize();
+        Thread.sleep(2000);
+
+        WebElement webElement = driver.findElement(By.linkText("Sign in"));
+        webElement.click();
+        Thread.sleep(2000);
+
+        driver.findElement(By.id("email")).sendKeys("sunny@example.com");
+        driver.findElement(By.id("password")).sendKeys("sunny@200");
+        Thread.sleep(2000);
+        driver.findElement(By.xpath("//form//button[@type='submit']")).click();
+        
+        WebElement h1 = driver.findElement(By.tagName("h1"));
+        System.out.println(h1.getText());
+        String msg = h1.getText();
+        Assert.assertEquals(msg,"Sign in to your account");
+
     }
 	  
     @AfterClass
