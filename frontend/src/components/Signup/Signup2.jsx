@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import AuthService from "../../services/AuthService";
+import axios from "../../api/axios";
 
 const Signup = () => {
   const [formData, setFormData] = useState({
@@ -27,7 +27,7 @@ const Signup = () => {
     console.log("Form Data:", formData);
 
     // Add your sign-up logic here
-    const response = await AuthService.signup(formData);
+    const response = await axios.post("/users/signup", formData);
     console.log(response);
 
     // Navigate to the appropriate page after successful sign-up
