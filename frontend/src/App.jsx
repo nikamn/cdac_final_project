@@ -32,6 +32,9 @@ import Checkout from "./components/Checkout/Checkout";
 import BlogPost from "./components/Blog/BlogPost";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
 import ProductAddComponent from "./components/Admin/AdminDashBoard/ProductAddComponent";
+import Success from "./components/Payment/Success";
+import Failed from "./components/Payment/Failed";
+
 
 function App() {
   const user = AuthService.getUser();
@@ -53,6 +56,9 @@ function App() {
         <Route path="wishlist" element={<Wishlist />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="products" element={<Products />} />
+        <Route path="/payment/success" element={<Success/>} />
+        <Route path="/payment/failed" element={<Failed />} />
+
 
         {user && (
           <Route path="admin" element={<AdminHome />}>
