@@ -9,39 +9,39 @@ const CartItemCard = ({ item }) => {
   const { addToCart, removeFromCart } = useContext(CartContext);
   return (
     <div className="w-full h-auto flex flex-col justify-evenly border border-b-2 rounded-lg shadow-md bg-white">
-      <div className="w-full flex gap-4 p-4 h-[100px]">
+      <div className="w-full flex gap-4 p-4 h-[100px] md:h-auto">
         <img
           src={item.thumbnail}
           alt={item.title}
           className="object-contain rounded-md max-w-[150px] w-1/2"
         />
-        <div className="flex flex-col justify-start px-2 w-1/2">
-          <h1 className="text-2xl font-bold py-2">{item.title}</h1>
-          <p className="text-2xl text-slate-500">{item.price}</p>
+        <div className="flex flex-col justify-start px-2 w-1/2 md:h-[100px] overflow-hidden">
+          <h1 className="text-2xl md:text-lg font-bold py-2">{item.title}</h1>
+          <p className="text-2xl md:text-lg text-slate-500">{item.price}</p>
         </div>
       </div>
 
       <div className="flex gap-4 border w-full p-4 justify-between">
         <div className="flex gap-3">
           <button
-            className="px-3 py-1 w-auto bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
+            className="px-2 py-1 w-auto bg-gray-800 text-white text-base  rounded flex justify-center items-center"
             onClick={() => {
               addToCart(item);
             }}
           >
-            <FontAwesomeIcon icon={faPlus} className="text-2xl" />
+            <FontAwesomeIcon icon={faPlus} className="text-2xl md:text-lg" />
           </button>
-          <p className="text-4xl font-normal">{item.quantity}</p>
+          <p className="text-4xl md:text-2xl font-normal">{item.quantity}</p>
           <button
-            className="px-3 py-1 w-auto bg-gray-800 text-white text-base font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700 flex justify-center items-center"
+            className="px-2 py-1 w-auto bg-gray-800 text-white text-base  rounded flex justify-center items-center"
             onClick={() => {
               removeFromCart(item);
             }}
           >
-            <FontAwesomeIcon icon={faMinus} className="text-2xl" />
+            <FontAwesomeIcon icon={faMinus} className="text-2xl md:text-2xl" />
           </button>
         </div>
-        <p className="self-center text-3xl font-semibold">
+        <p className="self-center text-3xl font-semibold md:text-2xl">
           $ {item.quantity * item.price}
         </p>
       </div>

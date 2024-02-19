@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom";
 
 import Header from "./Header/Header";
-import Footer from "./Footer/Footer";
+import Footer2 from "./Footer/Footer2";
 
 import "bootstrap/dist/css/bootstrap.min.css";
 
@@ -16,7 +16,7 @@ function Layout() {
           <Outlet />
         </main>
       </div>
-      <Footer />
+      <Footer2 />
     </div>
   );
 }

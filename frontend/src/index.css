@@ -7,7 +7,6 @@
 }
 
 .active {
-  color: rgb(163, 231, 129) !important;
   font-size: large !important;
   text-shadow: 0 0 8px #5a7076;
   transition: all 0.3s ease-in;
