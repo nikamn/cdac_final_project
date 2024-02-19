@@ -6,6 +6,13 @@
   background-image: url("../../assets/aboutus/about-us-bg.png") !important;
 }
 
+.active {
+  color: rgb(163, 231, 129) !important;
+  font-size: large !important;
+  text-shadow: 0 0 8px #5a7076;
+  transition: all 0.3s ease-in;
+}
+
 *,
 *::after,
 *::before {
@@ -28,7 +35,7 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Libre Baskerville", serif;
+  font-family: "Playfair Display", serif;
   color: #023f3a;
 }
 

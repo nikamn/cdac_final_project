@@ -1,5 +1,5 @@
 .categories-section {
-  margin: 10% 0 0;
+
   width: 100%;
   display: flex;
   flex-direction: column;
@@ -8,11 +8,11 @@
   padding: 5% 10%;
 }
 
-.categories-container {
+/* .categories-container {
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
-}
+} */
 
 /*-------------- categories__section ----------------*/
 /* .categories__section {

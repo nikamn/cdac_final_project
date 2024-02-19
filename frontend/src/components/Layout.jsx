@@ -4,15 +4,18 @@ import Header from "./Header/Header";
 import Footer from "./Footer/Footer";
 
 import "bootstrap/dist/css/bootstrap.min.css";
-import Header2 from "./Header/Header2";
 
 function Layout() {
   return (
-    <div className="app-wrapper">
-      <Header />
-      {/* <div className="content"> */}
-      <Outlet />
-      {/* </div> */}
+    <div className="min-h-screen flex flex-col justify-between overflow-hidden">
+      <div className="flex flex-col">
+        <header className=" h-[90px] shadow-md bg-white dark:bg-gray-800 z-50">
+          <Header />
+        </header>
+        <main>
+          <Outlet />
+        </main>
+      </div>
       <Footer />
     </div>
   );
