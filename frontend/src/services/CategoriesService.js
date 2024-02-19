@@ -52,7 +52,7 @@ const getAllCategories = async () => {
         headers: { Authorization: `Bearer ${token}` },
       })
       .then((response) => {
-        console.log("Respose from updateCategory --->" + response);
+        console.log("Respose from updateCategory --->" + JSON.stringify(response));
       })
       .catch((error) => {
         console.log(error);
