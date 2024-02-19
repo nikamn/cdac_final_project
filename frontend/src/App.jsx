@@ -13,7 +13,8 @@ import ToolsAndEquipments from "./pages/toolsEquipments/ToolsAndEquipments";
 import AboutUs from "./pages/aboutUs/AboutUs";
 import BlogPage from "./pages/BlogPage/BlogPage";
 // Products - move it to pages later
-import Products from "./components/Products/Products";
+// import Products from "./components/Products/Products";
+import Products from "./components/Products/Products2";
 
 // Admin
 import AdminHome from "./components/Admin/AdminHome";
