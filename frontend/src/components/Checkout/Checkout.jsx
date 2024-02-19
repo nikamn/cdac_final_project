@@ -33,6 +33,22 @@ const Checkout = () => {
 
             })
             .then((session) => {
+                console.log()
+                axios.post(`order/add`, dummyCartData,{
+                    headers: {
+                        Authorization: "Bearer " + token,
+                    },
+                    params: {
+                        sessionId: session.sessionId
+                     }
+                })
+                .then((response)=>{
+                     console.log(response.data);
+                })
+                .catch((error) =>{
+                    console.log(error);
+                })
+
                 return stripe.redirectToCheckout({
                     sessionId: session.sessionId
                 })
