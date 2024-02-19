@@ -17,22 +17,21 @@ export default function Cart() {
       <div
         className={
           !isCartActive
-            ? "w-full flex justify-between items-center sm:justify-between md:justify-between"
+            ? "w-full flex justify-between items-center sm:justify-between md:justify-between  mt-40 md:mt-36 lg:mt-32"
             : "m-4"
         }
       >
-        <h1 className={!isCartActive ? "text-2xl pe-2" : "text-5xl font-bold"}>
-          <FontAwesomeIcon
-            icon={faShoppingCart}
-            className={!isCartActive ? "text-2xl pe-2" : "text-4xl pe-2"}
-          />
+        <h1
+          className={!isCartActive ? "text-2xl pe-2" : "text-5xl font-normal"}
+        >
+          <FontAwesomeIcon icon={faShoppingCart} className={"text-2xl pe-2"} />
           Cart
         </h1>
         {!isCartActive && (
           <div className=" right-16 top-10">
             <button
-              className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
               onClick={toggle}
+              className="px-4 py-2 bg-gray-800 text-white text-xs rounded hover:bg-gray-700 focus:outline-none"
             >
               <FontAwesomeIcon icon={faRemove} className="text-2xl" />
             </button>
@@ -40,7 +39,7 @@ export default function Cart() {
         )}
       </div>
 
-      <div className=" w-auto flex flex-col gap-4 md:max-h-[60vh] p-4 md:overflow-y-scroll ">
+      <div className=" w-auto flex flex-col gap-4 md:max-h-[60vh] p-4 overflow-y-auto overflow-x-hidden ">
         {cartItems.map((item) => (
           <CartItemCard item={item} key={item.id} />
         ))}
@@ -50,7 +49,7 @@ export default function Cart() {
           <h1
             className={
               !isCartActive
-                ? "md:w-1/3 max-w-[200px] text-2xl sm:text-base lg:text-2xl font-bold"
+                ? "md:w-1/3 max-w-[200px] text-base sm:text-base lg:text-2xl font-bold"
                 : "md:w-1/3  font-bold text-3xl"
             }
           >

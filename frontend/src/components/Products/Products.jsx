@@ -30,7 +30,7 @@ export default function Products() {
         </h1>
         {!showModal && (
           <button
-            className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
+            className="px-4 py-2 md:px-8 md:py-3 w-auto md:text-xl bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
             onClick={toggle}
           >
             Cart ({cartItems.length})
