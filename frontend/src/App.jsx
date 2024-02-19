@@ -1,40 +1,43 @@
-// import "bootstrap/dist/css/bootstrap.min.css";
-
 import { Route, Routes } from "react-router-dom";
+import "./App.css";
 
 import Layout from "./components/Layout";
-// import Signin from "./components/Signin/Signin";
-import Signin from "./components/Signin/Signin2";
-import Signup from "./components/Signup/Signup";
 
-import Wishlist from "./components/Wishlist/Wishlist";
+//import Signin from "./components/Signin/Signin";
+import Signin from "./components/Signin/Signin2";
+//import Signup from "./components/Signup/Signup";
+import Signup from "./components/Signup/Signup2";
 
 import Home from "./pages/home/Home";
+import ToolsAndEquipments from "./pages/toolsEquipments/ToolsAndEquipments";
 import AboutUs from "./pages/aboutUs/AboutUs";
 import BlogPage from "./pages/BlogPage/BlogPage";
+// Products - move it to pages later
+// import Products from "./components/Products/Products";
+import Products from "./components/Products/Products2";
 
-import ToolsAndEquipments from "./pages/toolsEquipments/ToolsAndEquipments";
-
-import "./App.css";
-import ProfilePage from "./components/ProfilePage/ProfilePage";
-import Products from "./components/Products/Products";
-import ProductUpdateComponent from "./components/Admin/AdminDashBoard/ProductUpdateComponent";
-import ProductViewComponent from "./components/Admin/AdminDashBoard/ProductViewComponent";
+// Admin
 import AdminHome from "./components/Admin/AdminHome";
-import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
+import ProductViewComponent from "./components/Admin/AdminDashBoard/ProductViewComponent";
+import ProductUpdateComponent from "./components/Admin/AdminDashBoard/ProductUpdateComponent";
 import AdminDashSuccess from "./components/Admin/AdminDashBoard/AdminDashSuccess";
 import { AdminDashFailure } from "./components/Admin/AdminDashBoard/AdminDashFailure";
-import AuthService from "./services/AuthService";
+import ProductAddComponent from "./components/Admin/AdminDashBoard/ProductAddComponent";
 import AdminCategorySuccess from "./components/Admin/AdminDashBoard/AdminCategorySuccess";
 import AdminCategoryFail from "./components/Admin/AdminDashBoard/AdminCategoryFail";
 import CategoryUpdateComponent from "./components/Admin/AdminDashBoard/CategoryUpdateComponent";
-import Checkout from "./components/Checkout/Checkout";
+
 import BlogPost from "./components/Blog/BlogPost";
+import ProfilePage from "./components/ProfilePage/ProfilePage";
+import PlaceOrder from "./pages/PlaceOrder/PlaceOrder";
+import Checkout from "./components/Checkout/Checkout";
 import PageNotFound from "./pages/PageNotFound/PageNotFound";
-import ProductAddComponent from "./components/Admin/AdminDashBoard/ProductAddComponent";
 import Success from "./components/Payment/Success";
 import Failed from "./components/Payment/Failed";
+import Wishlist from "./components/Wishlist/Wishlist";
 
+// Services
+import AuthService from "./services/AuthService";
 
 function App() {
   const user = AuthService.getUser();
@@ -56,9 +59,8 @@ function App() {
         <Route path="wishlist" element={<Wishlist />} />
         <Route path="profile" element={<ProfilePage />} />
         <Route path="products" element={<Products />} />
-        <Route path="/payment/success" element={<Success/>} />
+        <Route path="/payment/success" element={<Success />} />
         <Route path="/payment/failed" element={<Failed />} />
-
 
         {user && (
           <Route path="admin" element={<AdminHome />}>
@@ -77,7 +79,10 @@ function App() {
               path="editProduct/:id"
               element={<ProductUpdateComponent />}
             />
-            <Route path="addProduct" element={<ProductAddComponent></ProductAddComponent>} />
+            <Route
+              path="addProduct"
+              element={<ProductAddComponent></ProductAddComponent>}
+            />
             <Route path="viewProduct/:id" element={<ProductViewComponent />} />
 
             {/*Category Management Routes*/}
