@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import CategoriesService from "../../../services/CategoriesService";
-import { Outlet } from "react-router-dom";
+import {Link, Outlet } from "react-router-dom";
 
 const AdminCategorySuccess = () => {
   const [allCategories, setAllCategories] = useState([]);
@@ -95,9 +95,9 @@ const AdminCategorySuccess = () => {
               <td>{category.categoryName}</td>
               <td>{category.description}</td>
               <td>
-                {/* <Link
+                <Link
                   to={`/admin/editCategory/${category.id}`}
-                  state={{ editCategory: category }}
+                  state={{editCategory: category }}
                 >
                   <button
                     type="button"
@@ -107,7 +107,7 @@ const AdminCategorySuccess = () => {
                   >
                     Update
                   </button>
-                </Link> */}
+                </Link>
               </td>
               <td>
                 <button
