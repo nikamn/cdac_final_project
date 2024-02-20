@@ -28,6 +28,11 @@ const Header = () => {
   }, [flyer, flyerTwo, location]);
 
   const handleSignOut = () => {
+    const cartItems = JSON.parse(localStorage.getItem("cartItems"));
+    console.log(cartItems);
+
+    localStorage.setItem("cartItems", []);
+
     AuthService.logout();
     setFlyer(false);
   };

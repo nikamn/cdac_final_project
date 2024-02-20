@@ -5,22 +5,22 @@ const getToken = () => {
 };
 
 const getAllCategories = async () => {
-    return axios
-      .get("/categories")
-      .then((response) => {
-        console.log(
-          "Respose from getAllCategories --->" + JSON.stringify(response.data)
-        );
-        return response;
-      })
-      .catch((error) => {
-        console.log(error);
-        throw error;
-      });
-  };
+  return axios
+    .get("/categories")
+    .then((response) => {
+      console.log(
+        "Respose from getAllCategories --->" + JSON.stringify(response.data)
+      );
+      return response;
+    })
+    .catch((error) => {
+      console.log(error);
+      throw error;
+    });
+};
 
-  const getCategoryById = async(categoryId) =>{
-    return axios
+const getCategoryById = async (categoryId) => {
+  return axios
     .get("/categories/" + categoryId)
     .then((response) => {
       console.log(
@@ -31,10 +31,10 @@ const getAllCategories = async () => {
       console.log(error);
       throw error;
     });
-  }
+};
 
-  const addNewCategory = async(newCategory)=>{
-    return axios
+const addNewCategory = async (newCategory) => {
+  return axios
     .post("/categories", { newCategory })
     .then((response) => {
       return response;
@@ -43,42 +43,49 @@ const getAllCategories = async () => {
       console.log(error);
       throw error;
     });
-  }
+};
 
-  const updateCategory = async (category) => {
-    const token = getToken();
-    return axios
-      .put("/categories/" + category.id, category, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        console.log("Respose from updateCategory --->" + JSON.stringify(response));
-      })
-      .catch((error) => {
-        console.log(error);
-        throw error;
-      });
-  };
+const updateCategory = async (category) => {
+  const token = getToken();
+  return axios
+    .put("/categories/" + category.id, category, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((response) => {
+      console.log(
+        "Respose from updateCategory --->" + JSON.stringify(response)
+      );
+    })
+    .catch((error) => {
+      console.log(error);
+      throw error;
+    });
+};
 
-  const deleteCategoryById = async (categoryId) => {
-    const token = getToken();
-    return axios
-      .delete("/categories/" + categoryId, {
-        headers: { Authorization: `Bearer ${token}` },
-      })
-      .then((response) => {
-        console.log(
-          "Respose from deletecategoryById --->" + JSON.stringify(response)
-        );
-        return response;
-      })
-      .catch((error) => {
-        console.log(error);
-        throw error;
-      });
-  };
+const deleteCategoryById = async (categoryId) => {
+  const token = getToken();
+  return axios
+    .delete("/categories/" + categoryId, {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+    .then((response) => {
+      console.log(
+        "Respose from deletecategoryById --->" + JSON.stringify(response)
+      );
+      return response;
+    })
+    .catch((error) => {
+      console.log(error);
+      throw error;
+    });
+};
 
+const CategoriesService = {
+  getAllCategories,
+  getCategoryById,
+  addNewCategory,
+  updateCategory,
+  deleteCategoryById,
+};
 
-  const CategoriesService = {getAllCategories, getCategoryById, addNewCategory, updateCategory, deleteCategoryById};
-
-  export default CategoriesService;
+export default CategoriesService;

@@ -11,12 +11,12 @@ const CartItemCard = ({ item }) => {
     <div className="w-full h-auto flex flex-col justify-evenly border border-b-2 rounded-lg shadow-md bg-white">
       <div className="w-full flex gap-4 p-4 h-[100px] md:h-auto">
         <img
-          src={item.thumbnail}
-          alt={item.title}
+          src={item.imageUrl}
+          alt={item.productName}
           className="object-contain rounded-md max-w-[150px] w-1/2"
         />
         <div className="flex flex-col justify-start px-2 w-1/2 md:h-[100px] overflow-hidden">
-          <h1 className="text-2xl md:text-lg font-bold py-2">{item.title}</h1>
+          <h1 className="text-2xl md:text-lg font-bold py-2">{item.productName}</h1>
           <p className="text-2xl md:text-lg text-slate-500">{item.price}</p>
         </div>
       </div>

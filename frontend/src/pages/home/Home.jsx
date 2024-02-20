@@ -4,6 +4,7 @@ import "./Home.css";
 import Categories from "../../components/categories/Categories";
 import Services from "../../components/ourServices/Services";
 import Mission from "../../components/Mission/Mission";
+import { Link } from "react-router-dom";
 
 function Home() {
   return (
@@ -23,12 +24,14 @@ function Home() {
             </span>
           </h1>
 
-          <button
-            role="button"
-            className="cta-btn w-auto text-white px-5 py-3 text-2xl hover:bg-green-200 hover:bg-opacity-10 lg:text-xl "
-          >
-            Get Started
-          </button>
+          <Link to="products">
+            <button
+              role="button"
+              className="cta-btn w-auto text-white px-5 py-3 text-2xl hover:bg-green-200 hover:bg-opacity-10 lg:text-xl"
+            >
+              Get Started
+            </button>
+          </Link>
         </div>
 
         <div className="hero__imageBox flex  justify-center items-end mt-44 md:mt-0 md:items-center">

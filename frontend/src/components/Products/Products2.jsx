@@ -4,11 +4,15 @@ import { CartContext } from "../../contexts/CartContext";
 import { useEffect } from "react";
 import ProductService from "../../services/ProductService";
 import CartModal from "../Cart/CartModal";
+import AuthService from "../../services/AuthService";
+import { useNavigate } from "react-router-dom";
 
 const Products = () => {
   // const [showModal, setshowModal] = useState(false);
   const [products, setProducts] = useState([]);
   const { showModal, toggle, cartItems, addToCart } = useContext(CartContext);
+  const [user, setUser] = useState(AuthService.getUser());
+  const navigate = useNavigate();
 
   // const toggle = () => {
   //   setshowModal(!showModal);
@@ -17,8 +21,7 @@ const Products = () => {
   async function getProducts() {
     const response = await ProductService.getAllProducts();
     console.log(response.data);
-    //const response = await fetch("https://dummyjson.com/products");
-    const data =  response.data;
+    const data = response.data;
     setProducts(data);
   }
 
@@ -26,7 +29,8 @@ const Products = () => {
     getProducts();
   }, []);
 
-  return <div className="flex flex-col justify-center bg-gray-100">
+  return (
+    <div className="flex flex-col justify-center bg-gray-100">
       <div className="flex justify-between items-center px-20 py-5">
         <h1 className="text-2xl uppercase font-bold mt-10 text-center mb-10">
           Shop
@@ -52,7 +56,9 @@ const Products = () => {
               className="rounded-md h-48"
             />
             <div className="mt-4">
-              <h1 className="text-lg uppercase font-bold">{product.productName}</h1>
+              <h1 className="text-lg uppercase font-bold">
+                {product.productName}
+              </h1>
               <p className="mt-2 text-gray-600 text-sm">
                 {product.description.slice(0, 40)}...
               </p>
@@ -62,7 +68,11 @@ const Products = () => {
               <button
                 className="px-4 py-2 bg-gray-800 text-white text-xs font-bold uppercase rounded hover:bg-gray-700 focus:outline-none focus:bg-gray-700"
                 onClick={() => {
-                  addToCart(product);
+                  if (user) {
+                    addToCart(product);
+                  } else {
+                    navigate("/signin");
+                  }
                 }}
               >
                 Add to cart
@@ -73,7 +83,7 @@ const Products = () => {
       </div>
       <CartModal />
     </div>
-;
+  );
 };
 
 export default Products;
