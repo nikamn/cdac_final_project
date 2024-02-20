@@ -1,4 +1,3 @@
-
 import axios from "../api/axios";
 
 const getToken = () => {
@@ -38,11 +37,13 @@ const getProductById = async (productId) => {
 const addNewProduct = async (product) => {
   const token = getToken();
   return axios
-    .post("/products/",  product ,{
+    .post("/products/", product, {
       headers: { Authorization: `Bearer ${token}` },
     })
     .then((response) => {
-      console.log("response from addNewProduct -->"+JSON.stringify(response.data))
+      console.log(
+        "response from addNewProduct -->" + JSON.stringify(response.data)
+      );
       return response;
     })
     .catch((error) => {

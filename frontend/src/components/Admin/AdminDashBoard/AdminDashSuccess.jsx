@@ -64,7 +64,7 @@ const AdminDashSuccess = () => {
         setDisplayProducts([...allproducts]);
       }
     }
-  }, [searchText]);
+  }, [allproducts, searchText]);
 
   const handleChange = (e) => {
     setSearchText(e.target.value);

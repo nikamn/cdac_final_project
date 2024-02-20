@@ -47,12 +47,12 @@ const Products = () => {
             className="bg-white shadow-md rounded-lg px-10 py-10"
           >
             <img
-              src={product.image_url}
-              alt={product.product_name}
+              src={product.imageUrl}
+              alt={product.productName}
               className="rounded-md h-48"
             />
             <div className="mt-4">
-              <h1 className="text-lg uppercase font-bold">{product.product_name}</h1>
+              <h1 className="text-lg uppercase font-bold">{product.productName}</h1>
               <p className="mt-2 text-gray-600 text-sm">
                 {product.description.slice(0, 40)}...
               </p>
